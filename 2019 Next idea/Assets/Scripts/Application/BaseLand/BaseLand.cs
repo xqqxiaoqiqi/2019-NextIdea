@@ -11,19 +11,28 @@ namespace GameTool
         public BaseLand leftnode;
         public BaseLand rightnode;
         public BaseLand bottomnode;
-        protected Element topelement;
-        public List<Element> sources = new List<Element>();
+        /// <summary>
+        /// 地格上层元件的引用
+        /// </summary>
+        public Element topelement;
+        /// <summary>
+        /// 地格充能源(输入)
+        /// </summary>
+        public List<Element> inputelements = new List<Element>();
         //test 
         //protected List<Element> sources = new List<Element>();
         //protected bool ischarge;
         //test
+        /// <summary>
+        /// 充能状态
+        /// </summary>
         public bool hascharged;
-        private Vector2 vector;
+        public Vector2 vector;
         protected void Awake()
         {
         }
         /// <summary>
-        /// 获取自身周围地格。
+        /// 更新自身周围地格。
         /// </summary>
         public void UpdateParameter()
         {
@@ -36,43 +45,62 @@ namespace GameTool
 
         }
         /// <summary>
-        /// 被充能时调用，激活上层元件并充能其非空相邻地格
+        /// 充能时激活上层元件并充能其非空相邻地格
         /// </summary>
         /// <param name="source">提供充能地格</param>
-        public virtual void OnFirstCharge(Element source)
+        public virtual void OnCharge(Element source)
         {
+            
             hascharged = true;
-            //if (!sources.Contains(source))
-            //{
-            //    sources.Add(source);
+            //如果上层元件不为空且不是自己的充能源的话，则激活这个元件
                 if (topelement != null&&source!=topelement)
                 {
                     topelement.OnActive(this);
 
-                    //todo:激活上层元件,上层元件为周围其他地格充能。
+                    //todo:激活上层元件,上层元件继续为周围其他地格充能。
 
                 }
                 else
                 {
 
                 }
-            //}
-          
-        }
-        public void RequestChargeNode(BaseLand node,Element source)
-        {
 
+        }
+        /// <summary>
+        /// 元件尝试充能地格时调用
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="sourceelement"></param>
+        public bool RequestOnCharge(BaseLand node,Element sourceelement)
+        {
             if(node!=null)
             {
-                if (!node.sources.Contains(source))
-                {
-                    node.sources.Add(source);
-                }
-                if( !node.hascharged)
-                {
-                    node.OnFirstCharge(this.topelement);
 
+                if (!node.inputelements.Contains(sourceelement))
+                {
+                    node.inputelements.Add(sourceelement);
+                    if (!node.hascharged)
+                    {
+                        node.OnCharge(this.topelement);
+                    }
+                    return true;
                 }
+
+
+
+            }
+            return false;
+        }
+        public void RequestCancelCharge(BaseLand node,Element source)
+        {
+            if(node!=null)
+            {
+                if(node.inputelements.Contains(source))
+                {
+                    node.inputelements.Remove(source);
+                    CancelCharge();
+                }
+
             }
         }
         /// <summary>
@@ -83,10 +111,11 @@ namespace GameTool
             if(hascharged)
             {
                 //todo:取消上层元件的激活状态,并取消其对相邻地格的充能
-                //topnode.CancelCharge();
-                //leftnode.CancelCharge();
-                //rightnode.CancelCharge();
-                //bottomnode.CancelCharge();
+                if(topelement!=null)
+                {
+                    topelement.SourceClosed(this);
+                }
+
             }
             hascharged = false;
 

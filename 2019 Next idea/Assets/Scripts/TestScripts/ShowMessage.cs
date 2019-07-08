@@ -14,12 +14,12 @@ public class ShowMessage : MonoBehaviour
     }
     public void GetSourcesMessage()
     {
-        Debug.Log("地格充能源（元件）：");
-        for (int i = 0; i < GetComponent<BaseLand>().sources.Count; i++)
+        Debug.Log("可用地格充能源（元件）：");
+        for (int i = 0; i < GetComponent<BaseLand>().inputelements.Count; i++)
         {
-            if (GetComponent<BaseLand>().sources[i] != null)
+            if (GetComponent<BaseLand>().inputelements[i] != null)
             {
-                Debug.Log(GetComponent<BaseLand>().sources[i]);
+                Debug.Log(GetComponent<BaseLand>().inputelements[i]);
             }
             else
             {
@@ -31,16 +31,28 @@ public class ShowMessage : MonoBehaviour
         if (GetComponentInChildren<Element>() != null)
         {
             Debug.Log("元件激活源（地格）：");
-            if (GetComponentInChildren<Element>().landsources.Count!=0)
+            if (GetComponentInChildren<Element>().landsource!=null)
             {
-                for (int j = 0; j < GetComponentInChildren<Element>().landsources.Count; j++)
-                {
-                    Debug.Log(GetComponentInChildren<Element>().landsources[j]);
-                }
+                //for(int j=0; j< GetComponentInChildren<Element>().landsources.Count; j++)
+                //{
+                    Debug.Log(GetComponentInChildren<Element>().landsource);
+
+                //}
+
             }
             else
             {
                 Debug.Log("none");
+            }
+            Debug.Log("元件激活地格（输出）：");
+
+            if (GetComponentInChildren<Element>().outputlands != null)
+            {
+                for(int j=0; j< GetComponentInChildren<Element>().outputlands.Count; j++)
+                {
+                Debug.Log(GetComponentInChildren<Element>().outputlands[j]);
+
+                }
             }
 
         }
