@@ -14,12 +14,12 @@ public class ShowMessage : MonoBehaviour
     }
     public void GetSourcesMessage()
     {
-        Debug.Log("可用地格充能源（元件）：");
-        for (int i = 0; i < GetComponent<BaseLand>().inputelements.Count; i++)
+        Debug.Log("inputlist：");
+        for (int i = 0; i < GetComponent<BaseLand>().inputlist.Count; i++)
         {
-            if (GetComponent<BaseLand>().inputelements[i] != null)
+            if (GetComponent<BaseLand>().inputlist[i] != null)
             {
-                Debug.Log(GetComponent<BaseLand>().inputelements[i]);
+                Debug.Log(GetComponent<BaseLand>().inputlist[i]);
             }
             else
             {
@@ -46,11 +46,11 @@ public class ShowMessage : MonoBehaviour
             }
             Debug.Log("元件激活地格（输出）：");
 
-            if (GetComponentInChildren<Element>().outputlands != null)
+            if (GetComponent<BaseLand>().outputlist != null)
             {
-                for(int j=0; j< GetComponentInChildren<Element>().outputlands.Count; j++)
+                for(int j=0; j< GetComponent<BaseLand>().outputlist.Count; j++)
                 {
-                Debug.Log(GetComponentInChildren<Element>().outputlands[j]);
+                Debug.Log(GetComponent<BaseLand>().outputlist[j]);
 
                 }
             }
