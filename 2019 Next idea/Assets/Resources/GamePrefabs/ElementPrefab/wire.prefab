@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8544348809858642378}
   m_Layer: 0
   m_Name: wire
-  m_TagString: Untagged
+  m_TagString: Wire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 8544348809858642378}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -142,7 +142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55869ccda9357664dbe1fd0ee26b4c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landsources: []
+  belangland: {fileID: 0}
+  landsource: {fileID: 0}
+  outputlands: []
 --- !u!222 &6294491417654291472
 CanvasRenderer:
   m_ObjectHideFlags: 0
