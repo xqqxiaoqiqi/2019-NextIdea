@@ -28,6 +28,7 @@ namespace GameTool
                     BeActive(null);
             }
         }
+
     }
 }
 

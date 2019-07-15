@@ -33,12 +33,7 @@ public class ShowMessage : MonoBehaviour
             Debug.Log("元件激活源（地格）：");
             if (GetComponentInChildren<Element>().landsource!=null)
             {
-                //for(int j=0; j< GetComponentInChildren<Element>().landsources.Count; j++)
-                //{
                     Debug.Log(GetComponentInChildren<Element>().landsource);
-
-                //}
-
             }
             else
             {
