@@ -32,7 +32,6 @@ namespace DataBase
                             string[] datadetail = elementdata[j].Split('|');
                             GameObject land = (GameObject)Instantiate(Resources.Load(landprefabpath + datadetail[0], typeof(GameObject)));
                             land.transform.position = new Vector2(j, lines.Length-1-i);
-                            land.name = "land" + land.transform.position.ToString();
                             landmap.Add(land.transform.position, land.GetComponent<BaseLand>());
                             try
                             {

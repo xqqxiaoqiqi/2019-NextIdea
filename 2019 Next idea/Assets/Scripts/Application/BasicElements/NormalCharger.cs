@@ -16,7 +16,7 @@ namespace GameTool
         /// 充能器被激活，如果被其他元件激活，则反相信号
         /// </summary>
         /// <param name="source"></param>
-        public override void OnActive(BaseLand source,BaseLand land)
+        public override void OnActive(BaseLand source)
         {
             if(source!=null)
             {
@@ -25,8 +25,12 @@ namespace GameTool
             }
             else
             {
-                    BeActive(null);
+                    BeActive();
             }
+        }
+        public override void BeforeRequestCharge(BaseLand land)
+        {
+                belangland.RequestOnCharge(land, this);
         }
     }
 }

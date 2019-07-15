@@ -10,7 +10,7 @@ public class ChargeTest : MonoBehaviour
     {
         for (int i = 0; i < NormalCharger.allnormalchargers.Count;i++)
         {
-            NormalCharger.allnormalchargers[i].OnActive(null,null);
+            NormalCharger.allnormalchargers[i].OnActive(null);
         }
     }
 }
