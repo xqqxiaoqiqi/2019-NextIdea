@@ -27,8 +27,9 @@ namespace GameTool
             {
                 landsource = land;
             }
-                BeActive(source);
+
             SetEnableTexture();
+                BeActive(source);
         }
         /// <summary>
         /// 元件被激活后调用
