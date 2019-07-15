@@ -7,7 +7,8 @@ namespace DataBase
 {
     public class ElementManager : UnitySingleton<ElementManager>
     {
-        private string elementprefabpath = "GamePrefabs/ElementPrefab/";
+        private static string elementprefabpath = "GamePrefabs/ElementPrefab/";
+
         /// <summary>
         /// 根据配置文件初始化元件
         /// </summary>

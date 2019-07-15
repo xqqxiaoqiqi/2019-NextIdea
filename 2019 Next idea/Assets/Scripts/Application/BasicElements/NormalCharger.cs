@@ -7,6 +7,7 @@ namespace GameTool
     public class NormalCharger : Element
     {
         public static List<NormalCharger> allnormalchargers = new List<NormalCharger>();
+        private string elementname = "NormalCharger";
         private  void Awake()
         {
             allnormalchargers.Add(this);
@@ -21,16 +22,17 @@ namespace GameTool
             if(source!=null)
             {
                 isactive = false;
-                //todo:反相信号。
+                //todo:更换材质，反相信号。
             }
             else
             {
                     BeActive();
             }
         }
-        public override void BeforeRequestCharge(BaseLand land)
+
+        public override void SetEnableTexture()
         {
-                belangland.RequestOnCharge(land, this);
+            GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + elementname,typeof(Sprite));
         }
     }
 }
