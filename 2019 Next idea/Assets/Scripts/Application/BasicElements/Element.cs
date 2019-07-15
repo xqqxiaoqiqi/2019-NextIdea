@@ -12,12 +12,12 @@ namespace GameTool
         /// 元件所在的地格引用
         /// </summary>
         public BaseLand myland;
-        //test 
-        //protected List<BaseLand> landsources = new List<BaseLand>();
         /// <summary>
         /// 元件激活源
         /// </summary>
         public BaseLand landsource;
+        protected static string enable_texturepath = "Texture/ElementsTexture/Enable/";
+        protected static string disable_texturepath = "Texture/ElementsTexture/Disable/";
         /// <summary>
         /// 被激活时调用，调用BeActive并充能其他相邻地格
         /// </summary>
@@ -28,6 +28,7 @@ namespace GameTool
                 landsource = land;
             }
                 BeActive(source);
+            SetEnableTexture();
         }
         /// <summary>
         /// 元件被激活后调用
@@ -127,6 +128,6 @@ namespace GameTool
             }
             return false;
         }
-
+        public abstract void SetEnableTexture();
     }
 }
