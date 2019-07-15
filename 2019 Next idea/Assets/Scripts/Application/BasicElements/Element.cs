@@ -19,50 +19,66 @@ namespace GameTool
         protected static string enable_texturepath = "Texture/ElementsTexture/Enable/";
         protected static string disable_texturepath = "Texture/ElementsTexture/Disable/";
         /// <summary>
-        ///元件充能的地格（输出）
-        /// </summary>
-        public List<BaseLand> outputlands = new List<BaseLand>();
-        /// <summary>
         /// 被激活时调用，调用BeActive并充能其他相邻地格
         /// </summary>
-        public virtual void OnActive( BaseLand source )
+        public virtual void OnActive( BaseLand source,BaseLand land )
         {
-            if(landsource == null)
+            if(land != null)
             {
-                landsource = source;
-            }
-            if(!isactive)
-            {
-                BeActive();
+                landsource = land;
             }
 
             SetEnableTexture();
+                BeActive(source);
         }
         /// <summary>
         /// 元件被激活后调用
         /// </summary>
-        protected virtual void BeActive()
+        protected virtual void BeActive(BaseLand source)
         {
-            //充能自己所在地格的相邻地格，绝大部分的元件都是这样。
-            superland = this.landsource;
-            BeforeRequestCharge(belangland.topnode);
-            BeforeRequestCharge(belangland.bottomnode);
-            BeforeRequestCharge(belangland.leftnode);
-            BeforeRequestCharge(belangland.rightnode);
-
+            //如果传入为空，说明是电源元件，标0入栈
+            if(source==null)
+            {
+                myland.stepstack.Push(0);
+            }
+            //若不为空，取栈顶元素加一入栈
+            else
+            {
+                int i = source.stepstack.Peek();
+                myland.stepstack.Push(++i);
+            }
+            //充能自己所在地格的相邻地格。
+            BeforeRequestCharge(myland.topnode);
+            BeforeRequestCharge(myland.bottomnode);
+            BeforeRequestCharge(myland.leftnode);
+            BeforeRequestCharge(myland.rightnode);
+            myland.stepstack.Pop();
+            //调用结束后当前标号出栈
 
         }
         public virtual void BeforeRequestCharge(BaseLand land)
         {
             if(land!=null)
             {
-                if (!outputlands.Contains(land)&&!land.Equals(superland))
+                //如果下一个结点的栈顶刚好比这个结点的栈顶小1/等于0，说明信号回流/回到起始始点，什么都不做。
+                try
                 {
-                    if(belangland.RequestOnCharge(land, this))
+                    int i = land.stepstack.Peek();
+                    if (!(i == myland.stepstack.Peek() - 1 | i == 0))
                     {
-                        outputlands.Add(land);
+                        if (land.RequestOnCharge(myland))
+                        {
+
+                        }
                     }
+
                 }
+                catch
+                {
+                    land.RequestOnCharge(myland);
+
+                }
+
             }
 
         }
@@ -95,10 +111,10 @@ namespace GameTool
         /// </summary>
         protected virtual void CancelActive()
         {
-            belangland.RequestCancelCharge(belangland.topnode, this);
-            belangland.RequestCancelCharge(belangland.bottomnode, this);
-            belangland.RequestCancelCharge(belangland.leftnode, this);
-            belangland.RequestCancelCharge(belangland.rightnode, this);
+            myland.RequestCancelCharge(myland.topnode);
+            myland.RequestCancelCharge(myland.bottomnode);
+            myland.RequestCancelCharge(myland.leftnode);
+            myland.RequestCancelCharge(myland.rightnode);
         }
         /// <summary>
         /// 获取所在地格引用
@@ -106,8 +122,8 @@ namespace GameTool
         /// <returns></returns>
         public bool Setbelangland()
         {
-            belangland = GetComponentInParent<BaseLand>();
-            if(belangland!=null)
+            myland = GetComponentInParent<BaseLand>();
+            if(myland!=null)
             {
                 return true;
             }

@@ -17,7 +17,7 @@ namespace GameTool
         /// 充能器被激活，如果被其他元件激活，则反相信号
         /// </summary>
         /// <param name="source"></param>
-        public override void OnActive(BaseLand source)
+        public override void OnActive(BaseLand source,BaseLand land)
         {
             if(source!=null)
             {
@@ -26,10 +26,9 @@ namespace GameTool
             }
             else
             {
-                    BeActive();
+                    BeActive(null);
             }
         }
-
         public override void SetEnableTexture()
         {
             GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + elementname,typeof(Sprite));
