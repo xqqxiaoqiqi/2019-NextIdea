@@ -122,6 +122,7 @@ namespace GameTool
         public bool Setbelangland()
         {
             myland = GetComponentInParent<BaseLand>();
+
             if(myland!=null)
             {
                 return true;
