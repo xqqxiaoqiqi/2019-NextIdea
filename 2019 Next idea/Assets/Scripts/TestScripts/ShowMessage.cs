@@ -32,7 +32,7 @@ public class ShowMessage : MonoBehaviour
 
         if (GetComponentInChildren<Element>() != null)
         {
-            //Debug.Log("元件激活源（地格）：");
+            Debug.Log("元件激活源（地格）：");
             if (GetComponentInChildren<Element>().landsource!=null)
             {
                     Debug.Log(GetComponentInChildren<Element>().landsource);
@@ -41,7 +41,7 @@ public class ShowMessage : MonoBehaviour
             {
                // Debug.Log("none");
             }
-           // Debug.Log("元件激活地格（输出）：");
+            Debug.Log("元件激活地格（输出）：");
 
             if (GetComponent<BaseLand>().outputlist != null)
             {

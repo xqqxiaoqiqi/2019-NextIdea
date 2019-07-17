@@ -18,6 +18,8 @@ namespace GameTool
         public BaseLand landsource;
         protected static string enable_texturepath = "Texture/ElementsTexture/Enable/";
         protected static string disable_texturepath = "Texture/ElementsTexture/Disable/";
+        protected string texturename;
+        protected static Dictionary<Vector3, Element> elementlist = new Dictionary<Vector3, Element>();
         /// <summary>
         /// 被激活时调用，调用BeActive并充能其他相邻地格
         /// </summary>
@@ -28,8 +30,8 @@ namespace GameTool
                 landsource = land;
             }
 
-            SetEnableTexture();
-                BeActive(source);
+            BeActive(source);
+            GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + texturename, typeof(Sprite));
         }
         /// <summary>
         /// 元件被激活后调用
@@ -120,16 +122,41 @@ namespace GameTool
         /// 获取所在地格引用
         /// </summary>
         /// <returns></returns>
-        public bool Setbelangland()
+        public bool SetMyLand()
         {
             myland = GetComponentInParent<BaseLand>();
 
             if(myland!=null)
             {
+                elementlist.Add(this.transform.position, this);
+                UpdateTexture();
+                UpdateNearTexture(myland.topnode);
+                UpdateNearTexture(myland.bottomnode);
+                UpdateNearTexture(myland.leftnode);
+                UpdateNearTexture(myland.rightnode);
                 return true;
             }
             return false;
         }
-        public abstract void SetEnableTexture();
+        public abstract void UpdateTexture();
+        public void UpdateNearTexture(BaseLand land)
+        {
+            if (land != null)
+            {
+                if (land.myelement != null)
+                {
+                    land.myelement.UpdateTexture();
+                }
+            }
+
+        }
+        public static bool ContainElement(Vector3 vector,int x,int y)
+        {
+            if(elementlist.ContainsKey(new Vector3(vector.x+x,vector.y+y,vector.z)))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -20,8 +20,9 @@ namespace DataBase
             GameObject element = (GameObject)Instantiate(Resources.Load(elementprefabpath + state[0], typeof(GameObject)));
             //todo:检测元件是否存在特殊状态，如有则处理
             element.transform.SetParent(land.transform);
-            element.transform.position = new Vector3(land.transform.position.x, land.transform.position.y, land.transform.position.z - 0.1f);
-            element.GetComponent<Element>().Setbelangland();
+            element.transform.localPosition = new Vector3(0,0, - 0.1f);
+            land.GetComponent<BaseLand>().myelement = land.GetComponentInChildren<Element>();
+            element.GetComponent<Element>().SetMyLand();
 
         }
     }

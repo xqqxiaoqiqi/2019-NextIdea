@@ -37,14 +37,26 @@ namespace GameTool
         /// <summary>
         /// 更新自身周围地格。
         /// </summary>
-        public void UpdateParameter()
+        public void UpdateLandParameter()
         {
             vector = GetComponent<Transform>().position;
-            myelement = GetComponentInChildren<Element>();
-            topnode = LandManager.GetLand(new Vector2(vector.x, vector.y + 1));
-            leftnode = LandManager.GetLand(new Vector2(vector.x - 1, vector.y));
-            rightnode = LandManager.GetLand(new Vector2(vector.x + 1, vector.y));
-            bottomnode = LandManager.GetLand(new Vector2(vector.x, vector.y - 1));
+            UpdateNearLandParameter(this);
+            UpdateNearLandParameter(topnode);
+            UpdateNearLandParameter(bottomnode);
+            UpdateNearLandParameter(leftnode);
+            UpdateNearLandParameter(rightnode);
+
+
+        }
+        public void UpdateNearLandParameter(BaseLand land)
+        {
+            if(land!=null)
+            {
+                land.topnode = LandManager.GetLand(new Vector2(land.vector.x, land.vector.y + 1));
+                land.bottomnode = LandManager.GetLand(new Vector2(land.vector.x, land.vector.y - 1));
+                land.leftnode = LandManager.GetLand(new Vector2(land.vector.x - 1, land.vector.y));
+                land.rightnode = LandManager.GetLand(new Vector2(land.vector.x + 1, land.vector.y));
+            }
 
         }
         /// <summary>

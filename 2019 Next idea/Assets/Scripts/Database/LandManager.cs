@@ -34,6 +34,7 @@ namespace DataBase
                             land.transform.position = new Vector2(j, lines.Length-1-i);
                             land.name = "land" + land.transform.position.ToString();
                             landmap.Add(land.transform.position, land.GetComponent<BaseLand>());
+                            land.GetComponent<BaseLand>().UpdateLandParameter();
                             try
                             {
                                 if (datadetail[1] != null)
@@ -46,16 +47,17 @@ namespace DataBase
                                 //donothinghere
                             }
                         }
+                        
                     }
                 }
             }
-            SetBorderNode();
+           // SetBorderNode();
         }
         private void SetBorderNode()
         {
             foreach (BaseLand land in landmap.Values)
             {
-                land.UpdateParameter();
+                land.UpdateLandParameter();
             }
         }
         public static BaseLand GetLand(Vector2 vector)
