@@ -39,7 +39,7 @@ namespace DataBase
                             {
                                 if (datadetail[1] != null)
                                 {
-                                    ElementManager.Instance().AddElement(land, datadetail[1]);
+                                    GameElementManager.Instance().AddElement(land, datadetail[1]);
                                 }
                             }
                             catch

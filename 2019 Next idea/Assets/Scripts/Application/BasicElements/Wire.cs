@@ -24,7 +24,8 @@ namespace GameTool
                     containpos.Add(new Vector2(pos[j, 0], pos[j, 1]));
                 }
             }
-            switch(i)
+            transform.localEulerAngles = new Vector3(0, 0, 0);
+            switch (i)
             {
                 case 1:
                     GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + line_wire, typeof(Sprite));
@@ -40,7 +41,7 @@ namespace GameTool
                     {
                         GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + line_wire, typeof(Sprite));
                         texturename = line_wire;
-                        Vector2 newvect = containpos[0] + containpos[1];
+                        Vector2 newvect = containpos[0] - containpos[1];
                         if(newvect==new Vector2(0,2)|newvect == new Vector2(0,-2))
                         {
                             transform.localEulerAngles = new Vector3(0, 0, -90);
@@ -83,7 +84,6 @@ namespace GameTool
                     else if (vect3 == new Vector2(0, 1))
                     {
                         transform.localEulerAngles = new Vector3(0, 0, -180);
-
                     }
                     else
                     {

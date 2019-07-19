@@ -78,7 +78,6 @@ namespace GameTool
                 catch
                 {
                     land.RequestOnCharge(myland);
-
                 }
 
             }
