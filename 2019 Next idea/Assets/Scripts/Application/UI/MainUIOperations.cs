@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/**
+ * 作用 ： 为主界面UI Button提供底层实现
+ * 挂载位置 ： UI->Canvas
+ * */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,6 +46,8 @@ public class MainUIOperations : MonoBehaviour
     #region Introduction panel Oper
     public void OnClickIntroButton()
     {
+        IsIntroPanelShowing = true;
+
         IntroductionPanel.SetActive(true);
     }
 
@@ -48,9 +55,11 @@ public class MainUIOperations : MonoBehaviour
     {
 
         //当点击UI以外的元素时，收起文字介绍窗口
-        if (IsIntroPanelShowing && Input.GetMouseButtonDown(0) && UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        if (IsIntroPanelShowing && Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
             IntroductionPanel.SetActive(false);
+
+            IsIntroPanelShowing = false;
         }
         
     }
