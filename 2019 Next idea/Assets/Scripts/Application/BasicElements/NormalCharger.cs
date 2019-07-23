@@ -11,7 +11,6 @@ namespace GameTool
         {
             texturename = "NormalCharger";
             allnormalchargers.Add(this);
-            isactive = true;
         }
         /// <summary>
         /// 充能器被激活，如果被其他元件激活，则反相信号
@@ -21,12 +20,26 @@ namespace GameTool
         {
             if(source!=null)
             {
-                isactive = false;
-                //todo:更换材质，反相信号。
+                //base.OnSilence(source, land);
             }
             else
             {
-                    BeActive(null);
+                base.OnActive(source, land);
+            }
+        }
+        public override void OnSilence(BaseLand source, BaseLand land)
+        {
+            if(source!=null)
+            {
+                //base.OnActive(source, land);
+            }
+            else
+            {
+                BeSilence(source);
+                landsource = null;
+                isactive = false;
+                //材质更新。todo：取消特效播放 
+                GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + texturename, typeof(Sprite));
             }
         }
         public override void UpdateTexture()
