@@ -9,7 +9,8 @@ using UnityEngine;
 
 public class EleInvUIManager : MonoBehaviour
 {
-    private int ElementCounts;
+    [SerializeField]
+    private List<RectTransform> ElementList;
 
     [SerializeField]
     private List<RectTransform> ElementSlotList;
@@ -19,7 +20,7 @@ public class EleInvUIManager : MonoBehaviour
 
     private void Awake()
     {
-        ElementCounts = 0;
+        ElementList = new List<RectTransform>();
 
         ElementSlotList = new List<RectTransform>();
 
@@ -34,22 +35,24 @@ public class EleInvUIManager : MonoBehaviour
         //Debug.Log(ElementCounts + "   " + ElementSlotList.Count);
         //Debug.Log(ElementSlotList[0].position + "    " + ele.GetComponent<RectTransform>().position);
 
-        ele.GetComponent<RectTransform>().position = ElementSlotList[ElementCounts].position;
+        ele.GetComponent<RectTransform>().position = ElementSlotList[ElementList.Count].position;
 
-        ElementCounts++;
+        ElementList.Add(ele.GetComponent<RectTransform>());
 
         return true;
     }
 
     public bool RemoveElement(GameObject ele)
     {
-        if (ElementSlotList.Remove(ele.GetComponent<RectTransform>()))
+        if (ElementList.Remove(ele.GetComponent<RectTransform>()))
         {
-            ElementCounts--;
-
             Destroy(ele);
 
             //TODO:: 可以添加重新排序函数，每次从元件库拿取元件时，重排/整理显示元件
+            for(int i = 0; i < ElementList.Count; i++)
+            {
+                ElementList[i].position = ElementSlotList[i].position;
+            }
 
             return true;
         }
