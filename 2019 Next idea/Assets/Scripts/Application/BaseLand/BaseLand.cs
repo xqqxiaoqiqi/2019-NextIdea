@@ -20,9 +20,10 @@ namespace GameTool
         /// <summary>
         /// 地格充能源(输入)
         /// </summary>
-        // List<Element> inputelements = new List<Element>();
-        //test 
         public List<BaseLand> inputlist = new List<BaseLand>();
+        /// <summary>
+        /// 元件激活的地格链表，目前只在debug中用到过2019.7.23
+        /// </summary>
         public List<BaseLand> outputlist = new List<BaseLand>();
         //protected bool ischarge;
         //test
@@ -35,22 +36,26 @@ namespace GameTool
         {
         }
         /// <summary>
-        /// 更新自身周围地格。
+        /// 更新参数，因为涉及到布线问题，所以一个地格更新的事件时周围所有的地格都要更新结点
         /// </summary>
         public void UpdateLandParameter()
         {
             vector = GetComponent<Transform>().position;
-            UpdateNearLandParameter(this);
-            UpdateNearLandParameter(topnode);
-            UpdateNearLandParameter(bottomnode);
-            UpdateNearLandParameter(leftnode);
-            UpdateNearLandParameter(rightnode);
+            UpdateNode(this);
+            UpdateNode(topnode);
+            UpdateNode(bottomnode);
+            UpdateNode(leftnode);
+            UpdateNode(rightnode);
 
 
         }
-        public void UpdateNearLandParameter(BaseLand land)
+        /// <summary>
+        /// 更新传入land的结点信息
+        /// </summary>
+        /// <param name="land"></param>
+        public void UpdateNode(BaseLand land)
         {
-            if(land!=null)
+            if (land != null)
             {
                 land.topnode = LandManager.GetLand(new Vector2(land.vector.x, land.vector.y + 1));
                 land.bottomnode = LandManager.GetLand(new Vector2(land.vector.x, land.vector.y - 1));
@@ -65,19 +70,13 @@ namespace GameTool
         /// <param name="source">提供充能地格</param>
         public virtual bool OnCharge(BaseLand source)
         {
-            
+            //这个hascharged有啥用？？
             hascharged = true;
             //如果上层元件不为空，则激活这个元件
             if (myelement != null)
-                {
-                    myelement.OnActive(source,this);
-                    //激活上层元件,上层元件继续为周围其他地格充能。
-
-                }
-                else
-                {
-
-                }
+            {
+                myelement.OnActive(source, this);
+            }
             return true;
         }
         /// <summary>
@@ -87,7 +86,7 @@ namespace GameTool
         /// <param name="sourceelement"></param>
         public bool RequestOnCharge(BaseLand node)
         {
-            if(node!=null)
+            if (node != null)
             {
 
                 if (!inputlist.Contains(node))
@@ -103,33 +102,43 @@ namespace GameTool
             }
             return false;
         }
-        public void RequestCancelCharge(BaseLand node)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        public bool RequestCancelCharge(BaseLand node)
         {
-            if(node!=null)
+            if (node != null)
             {
-                if(node.inputlist.Contains(node))
+                if (inputlist.Contains(node))
                 {
-                    node.inputlist.Remove(node);
-                    CancelCharge();
-                }
+                    if(node.inputlist.Count==0||(node.inputlist.Count==1&&node.inputlist[0].Equals(this))||node.myelement is NormalCharger)
+                    {
+                        inputlist.Remove(node);
+                        node.outputlist.Remove(this);
+                        CancelCharge(node);
+                        return true;
+                    }
+                    else
+                    {
 
+                    }
+
+                }
             }
+            return false;
         }
         /// <summary>
-        /// 取消充能时调用，取消上层元件的激活状态并取消其对相邻地格的充能
+        /// 
         /// </summary>
-        protected void CancelCharge()
+        protected bool CancelCharge(BaseLand source)
         {
-            if(hascharged)
-            {
-                //todo:取消上层元件的激活状态,并取消其对相邻地格的充能
-                if(myelement!=null)
-                {
-                    myelement.SourceClosed(this);
-                }
-
-            }
             hascharged = false;
+            if (myelement != null)
+            {
+                myelement.OnSilence(source, this);
+            }
+            return true;
 
         }
 

@@ -21,20 +21,23 @@ namespace GameTool
         protected string texturename;
         protected static Dictionary<Vector3, Element> elementlist = new Dictionary<Vector3, Element>();
         /// <summary>
-        /// 被激活时调用，调用BeActive并充能其他相邻地格
+        /// 被激活时调用，更换材质播放特效并调用BeActive
         /// </summary>
         public virtual void OnActive( BaseLand source,BaseLand land )
         {
-            if(land != null)
+            //landsource是干啥的？？？？？
+            if (land != null)
             {
                 landsource = land;
             }
 
             BeActive(source);
+            //材质更新，todo:特效播放
+            isactive = true;
             GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + texturename, typeof(Sprite));
         }
         /// <summary>
-        /// 元件被激活后调用
+        /// 处理激活时的标号和广播
         /// </summary>
         protected virtual void BeActive(BaseLand source)
         {
@@ -54,10 +57,14 @@ namespace GameTool
             BeforeRequestCharge(myland.bottomnode);
             BeforeRequestCharge(myland.leftnode);
             BeforeRequestCharge(myland.rightnode);
-            myland.stepstack.Pop();
             //调用结束后当前标号出栈
+            myland.stepstack.Pop();
 
         }
+        /// <summary>
+        /// 判断land栈顶元素，合法则调用RequestCharge
+        /// </summary>
+        /// <param name="land"></param>
         public virtual void BeforeRequestCharge(BaseLand land)
         {
             if(land!=null)
@@ -68,10 +75,7 @@ namespace GameTool
                     int i = land.stepstack.Peek();
                     if (!(i == myland.stepstack.Peek() - 1 | i == 0))
                     {
-                        if (land.RequestOnCharge(myland))
-                        {
-
-                        }
+                        land.RequestOnCharge(myland);
                     }
 
                 }
@@ -84,38 +88,62 @@ namespace GameTool
 
         }
         /// <summary>
-        /// 充能源取消充能时调用,在这里判断自己是否还被激活
+        /// 被取消激活时调用，更换材质关掉特效并调用BeSilence
         /// </summary>
         /// <param name="source"></param>
-        public virtual void SourceClosed(BaseLand source)
+        public virtual void OnSilence(BaseLand source,BaseLand land)
         {
-            //
-            if(source!=null)
+            BeSilence(source);
+            if(myland.inputlist.Count==0)
             {
-                if (landsource==source)
-                {
-                    landsource=null;
-
-                        isactive = false;
-                        CancelActive();
-                }
+                landsource = null;
+                isactive = false;
+                //材质更新。todo：取消特效播放 
+                GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + texturename, typeof(Sprite));
+            }
+        }
+        /// <summary>
+        /// 处理静默时的标号和广播
+        /// </summary>
+        protected virtual void BeSilence(BaseLand source)
+        {
+            if(source==null)
+            {
+                myland.stepstack.Push(0);
             }
             else
             {
-                isactive = false;
-                CancelActive();
+                int i = source.stepstack.Peek();
+                myland.stepstack.Push(++i);
             }
+            BeforeCancelCharge(myland.topnode);
+            BeforeCancelCharge(myland.bottomnode);
+            BeforeCancelCharge(myland.leftnode);
+            BeforeCancelCharge(myland.rightnode);
+            myland.stepstack.Pop();
 
         }
         /// <summary>
-        /// 取消激活时，取消对自己相邻地格的充能
+        /// 判断land栈顶元素，合法则调用CanncelCharge
         /// </summary>
-        protected virtual void CancelActive()
+        /// <param name="land"></param>
+        public virtual void BeforeCancelCharge(BaseLand land)
         {
-            myland.RequestCancelCharge(myland.topnode);
-            myland.RequestCancelCharge(myland.bottomnode);
-            myland.RequestCancelCharge(myland.leftnode);
-            myland.RequestCancelCharge(myland.rightnode);
+            if(land!=null)
+            {
+                try
+                {
+                    int i = land.stepstack.Peek();
+                    if(!(i == myland.stepstack.Peek()-1|i==0))
+                    {
+                        land.RequestCancelCharge(myland);
+                    }
+                }
+                catch
+                {
+                    land.RequestCancelCharge(myland);
+                }
+            }
         }
         /// <summary>
         /// 获取所在地格引用
