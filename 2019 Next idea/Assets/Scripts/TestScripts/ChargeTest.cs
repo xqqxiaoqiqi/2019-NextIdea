@@ -9,6 +9,10 @@ namespace DataBase
     {
         public GameObject test;
         public NormalCharger testcharger;
+        public void Awake()
+        {
+            
+        }
         /// <summary>
         /// 电路运行
         /// </summary>
@@ -18,6 +22,7 @@ namespace DataBase
             {
                 NormalCharger.allnormalchargers[i].OnActive(null, null);
             }
+            //Todo:检测是否满足通关条件。
         }
         /// <summary>
         /// 电路关闭
