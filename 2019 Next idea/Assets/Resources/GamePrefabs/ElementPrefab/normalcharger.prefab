@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6512725834044310765}
   - component: {fileID: 2313162200302534246}
   - component: {fileID: 251930727257667686}
+  - component: {fileID: 6082989362244860123}
   m_Layer: 0
   m_Name: normalcharger
   m_TagString: Untagged
@@ -100,7 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myland: {fileID: 0}
-  landsource: {fileID: 0}
 --- !u!222 &2313162200302534246
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -138,3 +138,15 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &6082989362244860123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4785733818896753981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80de03761451f1d4cb6495dc2b7a9694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

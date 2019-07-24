@@ -9,7 +9,7 @@ namespace GameTool
         public static List<NormalCharger> allnormalchargers = new List<NormalCharger>();
         private  void Awake()
         {
-            texturename = "NormalCharger";
+            element_ID = "normalcharger";
             allnormalchargers.Add(this);
         }
         /// <summary>
@@ -40,7 +40,8 @@ namespace GameTool
         }
         public override void UpdateTexture()
         {
-            GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + texturename,typeof(Sprite));
+            GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + element_ID,typeof(Sprite));
+            GetComponent<ElementParticle>().UpdateParticleType(element_ID);
         }
     }
 }

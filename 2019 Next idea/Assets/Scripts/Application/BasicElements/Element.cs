@@ -18,7 +18,7 @@ namespace GameTool
         public static Element processingsource;
         protected static string enable_texturepath = "Texture/ElementsTexture/Enable/";
         protected static string disable_texturepath = "Texture/ElementsTexture/Disable/";
-        protected string texturename;
+        protected string element_ID;
         protected static Dictionary<Vector3, Element> elementlist = new Dictionary<Vector3, Element>();
         /// <summary>
         /// 被激活时调用，更换材质播放特效并调用BeActive
@@ -32,9 +32,9 @@ namespace GameTool
             }
 
             BeActive(lastland);
-            //材质更新，todo:特效播放
             isactive = true;
-            GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + texturename, typeof(Sprite));
+            GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + element_ID, typeof(Sprite));
+            GetComponent<ElementParticle>().PlayParticle();
         }
         /// <summary>
         /// 处理激活时的标号和广播
@@ -81,7 +81,8 @@ namespace GameTool
             if(lastland==null||myland.sourcelist.Count==0)
             {
                 isactive = false;
-                GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + texturename, typeof(Sprite));
+                GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + element_ID, typeof(Sprite));
+                GetComponent<ElementParticle>().StopParticle();
             }
         }
         /// <summary>

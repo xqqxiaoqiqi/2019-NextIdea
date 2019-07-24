@@ -29,7 +29,8 @@ namespace GameTool
             {
                 case 1:
                     GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + line_wire, typeof(Sprite));
-                    texturename = line_wire;
+                    element_ID = line_wire;
+                    GetComponent<ElementParticle>().UpdateParticleType(element_ID);
                     if (containpos.First()==new Vector2(0,1)|| containpos.First() == new Vector2(0, -1))
                     {
                         transform.localEulerAngles=new Vector3(0,0,-90);
@@ -40,7 +41,8 @@ namespace GameTool
                     if(vect==new Vector2(0,0))
                     {
                         GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + line_wire, typeof(Sprite));
-                        texturename = line_wire;
+                        element_ID = line_wire;
+                        GetComponent<ElementParticle>().UpdateParticleType(element_ID);
                         Vector2 newvect = containpos[0] - containpos[1];
                         if(newvect==new Vector2(0,2)|newvect == new Vector2(0,-2))
                         {
@@ -50,7 +52,8 @@ namespace GameTool
                     else
                     {
                         GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + l_wire, typeof(Sprite));
-                        texturename = l_wire;
+                        element_ID = l_wire;
+                        GetComponent<ElementParticle>().UpdateParticleType(element_ID);
                         if (vect==new Vector2(1,-1))
                         {
                             //donothing
@@ -71,7 +74,8 @@ namespace GameTool
                     break;
                 case 3:
                     GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + t_wire, typeof(Sprite));
-                    texturename = t_wire;
+                    element_ID = t_wire;
+                    GetComponent<ElementParticle>().UpdateParticleType(element_ID);
                     Vector2 vect3 = containpos[0] + containpos[1] + containpos[2];
                     if(vect3==new Vector2(0,-1))
                     {
@@ -92,7 +96,7 @@ namespace GameTool
                     break;
                 default:
                     GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + default_wire, typeof(Sprite));
-                    texturename = default_wire;
+                    element_ID = default_wire;
                     break;
             }
         }

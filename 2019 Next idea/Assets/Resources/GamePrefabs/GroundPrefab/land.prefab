@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7a7cf194705642c4eac7d7cc9eaef86d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.03529412, g: 0.03137255, b: 0.03137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   myelement: {fileID: 0}
   inputlist: []
   outputlist: []
+  sourcelist: []
   hascharged: 0
   vector: {x: 0, y: 0}
 --- !u!114 &8312863556489202230
