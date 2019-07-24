@@ -1,4 +1,4 @@
 land|normalcharger,land|wire,land|wire,land,land
 land|wire,land|wire,land|wire,land,land
-land,null,land|wire,land,land
-land,land|wire,land|wire,land|wire,land
+land,null,land|wire,land,land|wire
+land,land|wire,land|wire,land|wire,land|normalcharger

@@ -15,31 +15,27 @@ namespace GameTool
         /// <summary>
         /// 充能器被激活，如果被其他元件激活，则反相信号
         /// </summary>
-        /// <param name="source"></param>
-        public override void OnActive(BaseLand source,BaseLand land)
+        /// <param name="lastland"></param>
+        public override void OnActive(BaseLand lastland,Element source)
         {
-            if(source!=null)
+            if(lastland!=null)
             {
-                //base.OnSilence(source, land);
+                myland.sourcelist.Clear();
             }
             else
             {
-                base.OnActive(source, land);
+                base.OnActive(lastland, source);
             }
         }
-        public override void OnSilence(BaseLand source, BaseLand land)
+        public override void OnSilence(BaseLand lastland, Element source)
         {
-            if(source!=null)
+            if(lastland!=null)
             {
                 //base.OnActive(source, land);
             }
             else
             {
-                BeSilence(source);
-                landsource = null;
-                isactive = false;
-                //材质更新。todo：取消特效播放 
-                GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + texturename, typeof(Sprite));
+                base.OnSilence(lastland, source);
             }
         }
         public override void UpdateTexture()

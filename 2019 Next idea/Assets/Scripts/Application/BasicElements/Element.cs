@@ -15,7 +15,7 @@ namespace GameTool
         /// <summary>
         /// 元件激活源
         /// </summary>
-        public BaseLand landsource;
+        public static Element processingsource;
         protected static string enable_texturepath = "Texture/ElementsTexture/Enable/";
         protected static string disable_texturepath = "Texture/ElementsTexture/Disable/";
         protected string texturename;
@@ -23,15 +23,15 @@ namespace GameTool
         /// <summary>
         /// 被激活时调用，更换材质播放特效并调用BeActive
         /// </summary>
-        public virtual void OnActive( BaseLand source,BaseLand land )
+        public virtual void OnActive( BaseLand lastland,Element source )
         {
             //landsource是干啥的？？？？？
-            if (land != null)
+            if (source == null)
             {
-                landsource = land;
+                processingsource = this;
             }
 
-            BeActive(source);
+            BeActive(lastland);
             //材质更新，todo:特效播放
             isactive = true;
             GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + texturename, typeof(Sprite));
@@ -39,111 +39,75 @@ namespace GameTool
         /// <summary>
         /// 处理激活时的标号和广播
         /// </summary>
-        protected virtual void BeActive(BaseLand source)
+        protected virtual void BeActive(BaseLand lastland)
         {
             //如果传入为空，说明是电源元件，标0入栈
-            if(source==null)
+            if(lastland==null)
             {
                 myland.stepstack.Push(0);
             }
             //若不为空，取栈顶元素加一入栈
             else
             {
-                int i = source.stepstack.Peek();
+                int i = lastland.stepstack.Peek();
                 myland.stepstack.Push(++i);
             }
             //充能自己所在地格的相邻地格。
-            BeforeRequestCharge(myland.topnode);
-            BeforeRequestCharge(myland.bottomnode);
-            BeforeRequestCharge(myland.leftnode);
-            BeforeRequestCharge(myland.rightnode);
+            myland.BeforeRequestCharge(myland, myland.topnode);
+            myland.BeforeRequestCharge(myland, myland.bottomnode);
+            myland.BeforeRequestCharge(myland, myland.leftnode);
+            myland.BeforeRequestCharge(myland, myland.rightnode);
+
+
             //调用结束后当前标号出栈
             myland.stepstack.Pop();
 
         }
-        /// <summary>
-        /// 判断land栈顶元素，合法则调用RequestCharge
-        /// </summary>
-        /// <param name="land"></param>
-        public virtual void BeforeRequestCharge(BaseLand land)
-        {
-            if(land!=null)
-            {
-                //如果下一个结点的栈顶刚好比这个结点的栈顶小1/等于0，说明信号回流/回到起始始点，什么都不做。
-                try
-                {
-                    int i = land.stepstack.Peek();
-                    if (!(i == myland.stepstack.Peek() - 1 | i == 0))
-                    {
-                        land.RequestOnCharge(myland);
-                    }
 
-                }
-                catch
-                {
-                    land.RequestOnCharge(myland);
-                }
-
-            }
-
-        }
         /// <summary>
         /// 被取消激活时调用，更换材质关掉特效并调用BeSilence
         /// </summary>
-        /// <param name="source"></param>
-        public virtual void OnSilence(BaseLand source,BaseLand land)
+        /// <param name="lastland"></param>
+        public virtual void OnSilence(BaseLand lastland,Element source)
         {
-            BeSilence(source);
-            if(myland.inputlist.Count==0)
+            //landsource是干啥的？？？？？
+            if (source == null)
             {
-                landsource = null;
+                processingsource = this;
+            }
+
+            BeSilence(lastland);
+            //材质更新，todo:特效播放
+            if(lastland==null||myland.sourcelist.Count==0)
+            {
                 isactive = false;
-                //材质更新。todo：取消特效播放 
                 GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(disable_texturepath + texturename, typeof(Sprite));
             }
         }
         /// <summary>
         /// 处理静默时的标号和广播
         /// </summary>
-        protected virtual void BeSilence(BaseLand source)
+        protected virtual void BeSilence(BaseLand lastland)
         {
-            if(source==null)
+            //如果传入为空，说明是电源元件，标0入栈
+            if (lastland == null)
             {
                 myland.stepstack.Push(0);
             }
+            //若不为空，取栈顶元素加一入栈
             else
             {
-                int i = source.stepstack.Peek();
+                int i = lastland.stepstack.Peek();
                 myland.stepstack.Push(++i);
             }
-            BeforeCancelCharge(myland.topnode);
-            BeforeCancelCharge(myland.bottomnode);
-            BeforeCancelCharge(myland.leftnode);
-            BeforeCancelCharge(myland.rightnode);
+            //充能自己所在地格的相邻地格。
+            myland.BeforeCancelCharge(myland, myland.topnode);
+            myland.BeforeCancelCharge(myland, myland.bottomnode);
+            myland.BeforeCancelCharge(myland, myland.leftnode);
+            myland.BeforeCancelCharge(myland, myland.rightnode);
+            //调用结束后当前标号出栈
             myland.stepstack.Pop();
 
-        }
-        /// <summary>
-        /// 判断land栈顶元素，合法则调用CanncelCharge
-        /// </summary>
-        /// <param name="land"></param>
-        public virtual void BeforeCancelCharge(BaseLand land)
-        {
-            if(land!=null)
-            {
-                try
-                {
-                    int i = land.stepstack.Peek();
-                    if(!(i == myland.stepstack.Peek()-1|i==0))
-                    {
-                        land.RequestCancelCharge(myland);
-                    }
-                }
-                catch
-                {
-                    land.RequestCancelCharge(myland);
-                }
-            }
         }
         /// <summary>
         /// 获取所在地格引用
