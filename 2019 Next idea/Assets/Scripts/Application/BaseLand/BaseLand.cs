@@ -25,7 +25,7 @@ namespace GameTool
         /// 元件激活的地格链表，目前只在debug中用到过2019.7.23
         /// </summary>
         public List<BaseLand> outputlist = new List<BaseLand>();
-        //protected bool ischarge;
+        public List<Element> sourcelist = new List<Element>();
         //test
         /// <summary>
         /// 充能状态
@@ -65,78 +65,93 @@ namespace GameTool
 
         }
         /// <summary>
+        /// 判断land栈顶元素，合法则调用RequestCharge
+        /// </summary>
+        /// <param name="land"></param>
+        public virtual void BeforeRequestCharge(BaseLand thisland,BaseLand node)
+        {
+            if(node!=null)
+            {
+                if (node.myelement != null && node.stepstack.Count == 0)
+                {
+                    node.RequestOnCharge(thisland);
+                }
+            }
+
+
+        }
+
+        /// <summary>
+        /// 元件尝试充能地格时调用
+        /// </summary>
+        /// <param name="lastland"></param>
+        /// <param name="sourceelement"></param>
+        public bool RequestOnCharge(BaseLand lastland)
+        {
+                if (!sourcelist.Contains(Element.processingsource))
+                {
+                    sourcelist.Add(Element.processingsource);
+                    OnCharge(lastland);
+                    return true;
+                }
+            return false;
+        }
+        /// <summary>
         /// 充能时激活上层元件并充能其非空相邻地格
         /// </summary>
-        /// <param name="source">提供充能地格</param>
-        public virtual bool OnCharge(BaseLand source)
+        /// <param name="lastland">提供充能地格</param>
+        /// 
+        public virtual bool OnCharge(BaseLand lastland)
         {
             //这个hascharged有啥用？？
             hascharged = true;
             //如果上层元件不为空，则激活这个元件
             if (myelement != null)
             {
-                myelement.OnActive(source, this);
+                myelement.OnActive(lastland, Element.processingsource);
             }
             return true;
         }
         /// <summary>
-        /// 元件尝试充能地格时调用
+        /// 判断land栈顶元素，合法则调用CanncelCharge
         /// </summary>
-        /// <param name="node"></param>
-        /// <param name="sourceelement"></param>
-        public bool RequestOnCharge(BaseLand node)
+        /// <param name="source"></param>
+        public virtual void BeforeCancelCharge(BaseLand thisland, BaseLand node)
         {
             if (node != null)
             {
-
-                if (!inputlist.Contains(node))
+                if (node.myelement != null && node.stepstack.Count == 0)
                 {
-                    inputlist.Add(node);
-                    node.outputlist.Add(this);
-                    OnCharge(node);
+                    node.RequestCancelCharge(thisland);
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lastland"></param>
+        public bool RequestCancelCharge(BaseLand lastland)
+        {
+            if (lastland != null)
+            {
+                if (sourcelist.Contains(Element.processingsource))
+                {
+                    sourcelist.Remove(Element.processingsource);
+                    CancelCharge(lastland);
                     return true;
                 }
-
-
-
             }
             return false;
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="node"></param>
-        public bool RequestCancelCharge(BaseLand node)
-        {
-            if (node != null)
-            {
-                if (inputlist.Contains(node))
-                {
-                    if(node.inputlist.Count==0||(node.inputlist.Count==1&&node.inputlist[0].Equals(this))||node.myelement is NormalCharger)
-                    {
-                        inputlist.Remove(node);
-                        node.outputlist.Remove(this);
-                        CancelCharge(node);
-                        return true;
-                    }
-                    else
-                    {
-
-                    }
-
-                }
-            }
-            return false;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        protected bool CancelCharge(BaseLand source)
+        protected bool CancelCharge(BaseLand lastland)
         {
             hascharged = false;
             if (myelement != null)
             {
-                myelement.OnSilence(source, this);
+                myelement.OnSilence(lastland, Element.processingsource);
             }
             return true;
 
