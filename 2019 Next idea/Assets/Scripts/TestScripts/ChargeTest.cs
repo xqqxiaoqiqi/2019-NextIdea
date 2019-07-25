@@ -1,16 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DataBase;
 using GameTool;
 
-public class ChargeTest : MonoBehaviour
+namespace DataBase
 {
-  public void CircuitStartTest()
+    public class ChargeTest : MonoBehaviour
     {
-        for (int i = 0; i < NormalCharger.allnormalchargers.Count;i++)
+        public GameObject test;
+        public NormalCharger testcharger;
+        /// <summary>
+        /// 电路运行
+        /// </summary>
+        public void CircuitStartTest()
         {
-            NormalCharger.allnormalchargers[i].OnActive(null,null);
+            for (int i = 0; i < NormalCharger.allnormalchargers.Count; i++)
+            {
+                NormalCharger.allnormalchargers[i].OnActive(null, null);
+            }
+        }
+        /// <summary>
+        /// 电路关闭
+        /// </summary>
+        public void CircuitCloseTest()
+        {
+            for (int i = 0; i < NormalCharger.allnormalchargers.Count; i++)
+            {
+                NormalCharger.allnormalchargers[i].OnSilence(null, null);
+            }
+        }
+        public void AddElementTest()
+        {
+            GameElementManager.Instance().AddElement(test, "wire");
+        }
+
+        public void ChargerCancelTest()
+        {
+            testcharger.OnSilence(null, null);
+        }
+        public void ChargerOnTest()
+        {
+            testcharger.OnActive(null, null);
         }
     }
-}
+    }
+
+

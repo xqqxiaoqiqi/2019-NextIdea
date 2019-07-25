@@ -6,7 +6,7 @@ namespace GameTool
 {
     public class NormalLand :BaseLand
     {
-
+        
     }
 }
 

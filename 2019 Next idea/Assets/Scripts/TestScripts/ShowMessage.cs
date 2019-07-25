@@ -15,39 +15,39 @@ public class ShowMessage : MonoBehaviour
     public void GetSourcesMessage()
     {
 
-        Debug.Log("inputlist：");
-        for (int i = 0; i < GetComponent<BaseLand>().inputlist.Count; i++)
-        {
-            if (GetComponent<BaseLand>().inputlist[i] != null)
-            {
+        //Debug.Log("inputlist：");
+        //for (int i = 0; i < GetComponent<BaseLand>().inputlist.Count; i++)
+        //{
+        //    if (GetComponent<BaseLand>().inputlist[i] != null)
+        //    {
 
-                Debug.Log(GetComponent<BaseLand>().inputlist[i]);
-            }
-            else
-            {
-              //  Debug.Log("none");
-            }
+        //        Debug.Log(GetComponent<BaseLand>().inputlist[i]);
+        //    }
+        //    else
+        //    {
+        //      //  Debug.Log("none");
+        //    }
 
-        }
+        //}
 
         if (GetComponentInChildren<Element>() != null)
         {
             //Debug.Log("元件激活源（地格）：");
-            if (GetComponentInChildren<Element>().landsource!=null)
-            {
-                    Debug.Log(GetComponentInChildren<Element>().landsource);
-            }
-            else
-            {
-               // Debug.Log("none");
-            }
-           // Debug.Log("元件激活地格（输出）：");
+            //if (GetComponentInChildren<Element>().landsource!=null)
+            //{
+            //        Debug.Log(GetComponentInChildren<Element>().landsource);
+            //}
+            //else
+            //{
+            //   // Debug.Log("none");
+            //}
+            Debug.Log("元件激活源：");
 
-            if (GetComponent<BaseLand>().outputlist != null)
+            if (GetComponent<BaseLand>().sourcelist != null)
             {
-                for(int j=0; j< GetComponent<BaseLand>().outputlist.Count; j++)
+                for(int j=0; j< GetComponent<BaseLand>().sourcelist.Count; j++)
                 {
-                Debug.Log(GetComponent<BaseLand>().outputlist[j]);
+                Debug.Log(GetComponent<BaseLand>().sourcelist[j]);
 
                 }
             }

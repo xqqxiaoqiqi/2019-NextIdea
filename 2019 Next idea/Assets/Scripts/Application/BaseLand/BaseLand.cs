@@ -20,11 +20,12 @@ namespace GameTool
         /// <summary>
         /// 地格充能源(输入)
         /// </summary>
-        // List<Element> inputelements = new List<Element>();
-        //test 
         public List<BaseLand> inputlist = new List<BaseLand>();
+        /// <summary>
+        /// 元件激活的地格链表，目前只在debug中用到过2019.7.23
+        /// </summary>
         public List<BaseLand> outputlist = new List<BaseLand>();
-        //protected bool ischarge;
+        public List<Element> sourcelist = new List<Element>();
         //test
         /// <summary>
         /// 充能状态
@@ -35,89 +36,124 @@ namespace GameTool
         {
         }
         /// <summary>
-        /// 更新自身周围地格。
+        /// 更新参数，因为涉及到布线问题，所以一个地格更新的事件时周围所有的地格都要更新结点
         /// </summary>
-        public void UpdateParameter()
+        public void UpdateLandParameter()
         {
             vector = GetComponent<Transform>().position;
-            myelement = GetComponentInChildren<Element>();
-            topnode = LandManager.GetLand(new Vector2(vector.x, vector.y + 1));
-            leftnode = LandManager.GetLand(new Vector2(vector.x - 1, vector.y));
-            rightnode = LandManager.GetLand(new Vector2(vector.x + 1, vector.y));
-            bottomnode = LandManager.GetLand(new Vector2(vector.x, vector.y - 1));
+            UpdateNode(this);
+            UpdateNode(topnode);
+            UpdateNode(bottomnode);
+            UpdateNode(leftnode);
+            UpdateNode(rightnode);
 
+
+        }
+        /// <summary>
+        /// 更新传入land的结点信息
+        /// </summary>
+        /// <param name="land"></param>
+        public void UpdateNode(BaseLand land)
+        {
+            if (land != null)
+            {
+                land.topnode = LandManager.GetLand(new Vector2(land.vector.x, land.vector.y + 1));
+                land.bottomnode = LandManager.GetLand(new Vector2(land.vector.x, land.vector.y - 1));
+                land.leftnode = LandManager.GetLand(new Vector2(land.vector.x - 1, land.vector.y));
+                land.rightnode = LandManager.GetLand(new Vector2(land.vector.x + 1, land.vector.y));
+            }
+
+        }
+        /// <summary>
+        /// 判断land栈顶元素，合法则调用RequestCharge
+        /// </summary>
+        /// <param name="land"></param>
+        public virtual void BeforeRequestCharge(BaseLand thisland,BaseLand node)
+        {
+            if(node!=null)
+            {
+                if (node.myelement != null && node.stepstack.Count == 0)
+                {
+                    node.RequestOnCharge(thisland);
+                }
+            }
+
+
+        }
+
+        /// <summary>
+        /// 元件尝试充能地格时调用
+        /// </summary>
+        /// <param name="lastland"></param>
+        /// <param name="sourceelement"></param>
+        public bool RequestOnCharge(BaseLand lastland)
+        {
+                if (!sourcelist.Contains(Element.processingsource))
+                {
+                    sourcelist.Add(Element.processingsource);
+                    OnCharge(lastland);
+                    return true;
+                }
+            return false;
         }
         /// <summary>
         /// 充能时激活上层元件并充能其非空相邻地格
         /// </summary>
-        /// <param name="source">提供充能地格</param>
-        public virtual bool OnCharge(BaseLand source)
+        /// <param name="lastland">提供充能地格</param>
+        /// 
+        public virtual bool OnCharge(BaseLand lastland)
         {
-            
+            //这个hascharged有啥用？？
             hascharged = true;
             //如果上层元件不为空，则激活这个元件
             if (myelement != null)
-                {
-                    myelement.OnActive(source,this);
-                    //激活上层元件,上层元件继续为周围其他地格充能。
-
-                }
-                else
-                {
-
-                }
+            {
+                myelement.OnActive(lastland, Element.processingsource);
+            }
             return true;
         }
         /// <summary>
-        /// 元件尝试充能地格时调用
+        /// 判断land栈顶元素，合法则调用CanncelCharge
         /// </summary>
-        /// <param name="node"></param>
-        /// <param name="sourceelement"></param>
-        public bool RequestOnCharge(BaseLand node)
+        /// <param name="source"></param>
+        public virtual void BeforeCancelCharge(BaseLand thisland, BaseLand node)
         {
-            if(node!=null)
+            if (node != null)
             {
-
-                if (!inputlist.Contains(node))
+                if (node.myelement != null && node.stepstack.Count == 0)
                 {
-                    inputlist.Add(node);
-                    node.outputlist.Add(this);
-                    OnCharge(node);
-                    return true;
+                    node.RequestCancelCharge(thisland);
                 }
-
-
-
-            }
-            return false;
-        }
-        public void RequestCancelCharge(BaseLand node)
-        {
-            if(node!=null)
-            {
-                if(node.inputlist.Contains(node))
-                {
-                    node.inputlist.Remove(node);
-                    CancelCharge();
-                }
-
             }
         }
         /// <summary>
-        /// 取消充能时调用，取消上层元件的激活状态并取消其对相邻地格的充能
+        /// 
         /// </summary>
-        protected void CancelCharge()
+        /// <param name="lastland"></param>
+        public bool RequestCancelCharge(BaseLand lastland)
         {
-            if(hascharged)
+            if (lastland != null)
             {
-                //todo:取消上层元件的激活状态,并取消其对相邻地格的充能
-                if(myelement!=null)
+                if (sourcelist.Contains(Element.processingsource))
                 {
-                    myelement.SourceClosed(this);
+                    sourcelist.Remove(Element.processingsource);
+                    CancelCharge(lastland);
+                    return true;
                 }
-
             }
+            return false;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        protected bool CancelCharge(BaseLand lastland)
+        {
             hascharged = false;
+            if (myelement != null)
+            {
+                myelement.OnSilence(lastland, Element.processingsource);
+            }
+            return true;
 
         }
 

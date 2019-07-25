@@ -1,146 +1,165 @@
-﻿using System.Collections.Generic;
+﻿/**
+ * 作用 ： 统一管理当前元件库中的元件。同时控制着界面UI的展示
+ * 挂载位置 ： GameManager 
+ * */
+
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-[RequireComponent(typeof(Image), typeof(RectTransform))]
-public class ElementInventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class ElementInventory : MonoBehaviour
 {
-    private InventoryManager manager;
+    [HideInInspector]
+    public List<GameObject> ElementList;
 
-    private Transform ElementMangerTrans;
+    [SerializeField]
+    private Transform ElementUIParent;
 
-    private ElementManager elementManger;
+    [SerializeField]
+    private List<GameObject> ElementUIPrefebList;
 
-    private CameraOperation cameraManager;
-
-    private GameObject WirePhysicPrefeb;
-
-    private bool dragOnSurfaces = true;
-
-    private Dictionary<int, GameObject> m_DraggingIcons = new Dictionary<int, GameObject>();
-    private Dictionary<int, RectTransform> m_DraggingPlanes = new Dictionary<int, RectTransform>();
-
+    [SerializeField]
+    private EleInvUIManager UIManager;
 
     private void Start()
     {
-        manager = transform.parent.GetComponent<InventoryManager>();
 
-        ElementMangerTrans = manager.ElementManger;
-        elementManger = manager.ElementManger.GetComponent<ElementManager>();
-        cameraManager = manager.cameraManager;
-        WirePhysicPrefeb = manager.WirePhysicPrefeb;
+        ElementList = new List<GameObject>();
+
+
+        AddElement("Wire");
+        AddElement("Wire");
     }
 
-
-
-    public void OnBeginDrag(PointerEventData eventData)
+    /// <summary>
+    /// 向元件库中添加新的元件，同时，在UI上生成一个对应图标
+    /// TODO：：添加新的脚本，专门控制元件库的UI操作
+    /// </summary>
+    /// <param name="ElementType"></param>
+    /// <returns></returns>
+    public bool AddElement(string ElementType)
     {
-        var canvas = FindInParents<Canvas>(gameObject);
-        if (canvas == null)
-            return;
-
-        // We have clicked something that can be dragged.
-        // What we want to do is create an icon for this.
-        m_DraggingIcons[eventData.pointerId] = new GameObject("icon");
-
-        m_DraggingIcons[eventData.pointerId].transform.SetParent(canvas.transform, false);
-        m_DraggingIcons[eventData.pointerId].transform.SetAsLastSibling();
-
-        var image = m_DraggingIcons[eventData.pointerId].AddComponent<Image>();
-        // The icon will be under the cursor.
-        // We want it to be ignored by the event system.
-        var group = m_DraggingIcons[eventData.pointerId].AddComponent<CanvasGroup>();
-        group.blocksRaycasts = false;
-
-        image.sprite = GetComponent<Image>().sprite;
-        image.SetNativeSize();
-
-        if (dragOnSurfaces)
-            m_DraggingPlanes[eventData.pointerId] = transform as RectTransform;
-        else
-            m_DraggingPlanes[eventData.pointerId] = canvas.transform as RectTransform;
-
-        SetDraggedPosition(eventData);
-
-        //Disable the Camera move func in ElementManager
-        //elementManger.CanDrag = true;
-        manager.IsDraggingElement = true;
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (m_DraggingIcons[eventData.pointerId] != null)
-            SetDraggedPosition(eventData);
-    }
-
-    private void SetDraggedPosition(PointerEventData eventData)
-    {
-        if (dragOnSurfaces && eventData.pointerEnter != null && eventData.pointerEnter.transform as RectTransform != null)
-            m_DraggingPlanes[eventData.pointerId] = eventData.pointerEnter.transform as RectTransform;
-
-        var rt = m_DraggingIcons[eventData.pointerId].GetComponent<RectTransform>();
-        Vector3 globalMousePos;
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(m_DraggingPlanes[eventData.pointerId], eventData.position, eventData.pressEventCamera, out globalMousePos))
+        foreach (var GO in ElementUIPrefebList)
         {
-            rt.position = globalMousePos;
-            rt.rotation = m_DraggingPlanes[eventData.pointerId].rotation;
-        }
-    }
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        if (m_DraggingIcons[eventData.pointerId] != null)
-            Destroy(m_DraggingIcons[eventData.pointerId]);
+            if ( GO.transform.CompareTag(ElementType) )
+            {
+                GameObject ele = Instantiate(GO, ElementUIParent) as GameObject;
 
-        m_DraggingIcons[eventData.pointerId] = null;
+                ele.GetComponent<ElementUIController>().ElementsParent = ElementUIParent;
+                ele.GetComponent<ElementUIController>().inventory = this;
 
+                
 
-        //Instantiate
+                UIManager.AddElement(ele);
+                ElementList.Add(ele);
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Vector3 InstantPos = new Vector3(mousePos.x, mousePos.y , -0.1f);
-        Vector3 InstantDir = new Vector3(mousePos.x, mousePos.y, 1f);
-
-
-
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray.origin, ray.direction, out hit);
-        //Debug.DrawLine(ray.origin, hit.point, Color.black, 10);
-        //Debug.Log(hit.transform.name);
-
-        if (hit.transform != null && hit.transform.CompareTag("Land"))
-        {
-            //Put the wire there
-            GameObject GO = Instantiate(WirePhysicPrefeb, InstantPos, Quaternion.Euler(Vector3.zero), ElementMangerTrans) as GameObject;
-            GO.transform.parent = hit.transform;
-            GO.transform.localPosition = new Vector3(0, 0, -0.1f);
-        }
-        else
-        {
-            //TODO :: Make a Warning UI to tell the player current place have sth else.
+                return true;
+            }
         }
 
-        elementManger.ClearSelectedElement();
-        manager.IsDraggingElement = false;
+        return false;
     }
 
-    static public T FindInParents<T>(GameObject go) where T : Component
+
+    public bool RemoveElement(GameObject GO)
     {
-        if (go == null) return null;
-        var comp = go.GetComponent<T>();
 
-        if (comp != null)
-            return comp;
-
-        var t = go.transform.parent;
-        while (t != null && comp == null)
+        if (UIManager.RemoveElement(GO) && ElementList.Remove(GO))
         {
-            comp = t.gameObject.GetComponent<T>();
-            t = t.parent;
+            Debug.Log("Remove");
+
+            return true;
         }
-        return comp;
+
+        return false;
     }
 }
+
+
+/*
+ 
+     using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ElementInventory : MonoBehaviour
+{
+
+    [HideInInspector] public List<Transform> ElementList;
+
+    [SerializeField] private Transform ElementUIParent;
+
+    [SerializeField] private List<GameObject> ElementUIPrefebList;
+
+    [SerializeField] private List<RectTransform> ElementSlotList;
+
+    private void Awake()
+    {
+        ElementSlotList = new List<RectTransform>();
+
+        //Add all the pos in HeartP
+        ElementSlotList.AddRange(ElementUIParent.Find("ElementSlots").GetComponentsInChildren<RectTransform>());
+        ElementSlotList.Remove(ElementUIParent.Find("ElementSlots").GetComponent<RectTransform>());
+
+    }
+
+    public bool AddElement(string ElementType)
+    {
+        GameObject heart = null;
+
+        foreach (var GO in ElementUIPrefebList)
+        {
+            if (GO.name == ElementType)
+            {
+                heart = Instantiate(GO, this.ElementUIParent) as GameObject;
+
+            }
+        }
+
+        if (heart == null) return false;
+
+        ElementList.Add(heart.GetComponent<Transform>());
+
+        heart.GetComponent<RectTransform>().position = ElementSlotList[ElementList.Count - 1].position;
+
+        return true;
+    }
+
+    public bool RemoveHeart(RectTransform trans)
+    {
+
+        //remove the hearttrans from the list
+        if (!HeartTrans.Remove(trans))
+        {
+            return false;
+        }
+
+        //destroy the used heart
+        Destroy(trans.gameObject);
+
+        //resort the heart icons
+        for (int i = 0; i < HeartTrans.Count; i++)
+        {
+            HeartTrans[i].position = HeartSlots[i].position;
+        }
+
+        //if (HeartTrans.Count <= 0)
+        //{
+        //    //player die!
+        //    WorldInfo.GetPlayerController().OnPlayerDeath();
+
+        //}
+
+        return true;
+    }
+
+
+
+}
+
+
+
+     
+     */
