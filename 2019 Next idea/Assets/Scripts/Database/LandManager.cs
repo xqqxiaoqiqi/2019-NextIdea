@@ -9,13 +9,13 @@ namespace DataBase
     {
         private static Dictionary<Vector2, BaseLand> landmap = new Dictionary<Vector2, BaseLand>();
         private TextAsset mapdata;
-        private string datapath = "LevelCanvaDatabase/";
+        private string datapath = "LevelCanvaDatabase/MapData/";
         private string landprefabpath = "GamePrefabs/GroundPrefab/";
         private void Awake()
         {
-            ReadMap("landtestdata");
+            //ReadMap("landtestdata");
         }
-        private void ReadMap(string mapname)
+        internal void ReadMap(string mapname)
         {
             mapdata = Resources.Load(datapath + mapname, typeof(TextAsset)) as TextAsset;
             if(mapdata!=null)

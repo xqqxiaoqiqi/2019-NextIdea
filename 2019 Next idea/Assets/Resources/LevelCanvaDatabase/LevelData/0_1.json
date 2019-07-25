@@ -1,0 +1,16 @@
+[
+  {
+    "MapID": "landtestdata",
+    "StartElement": [
+
+    ],
+    "SuccessCondition": [
+      {
+        "light_0": "0,0,0,0,0",
+        "light_1": "1,1,1,1,1"
+      }
+     
+
+    ]
+  }
+]

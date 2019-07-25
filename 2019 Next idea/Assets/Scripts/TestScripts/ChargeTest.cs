@@ -11,17 +11,14 @@ namespace DataBase
         public NormalCharger testcharger;
         public void Awake()
         {
-            
+            LevelViewer.Instance().InstalizeLevel("0_1");
         }
         /// <summary>
         /// 电路运行
         /// </summary>
         public void CircuitStartTest()
         {
-            for (int i = 0; i < NormalCharger.allnormalchargers.Count; i++)
-            {
-                NormalCharger.allnormalchargers[i].OnActive(null, null);
-            }
+            LevelViewer.Instance().CircuitStart();
             //Todo:检测是否满足通关条件。
         }
         /// <summary>
@@ -29,10 +26,7 @@ namespace DataBase
         /// </summary>
         public void CircuitCloseTest()
         {
-            for (int i = 0; i < NormalCharger.allnormalchargers.Count; i++)
-            {
-                NormalCharger.allnormalchargers[i].OnSilence(null, null);
-            }
+            LevelViewer.Instance().CircuitClose();
         }
         public void AddElementTest()
         {
