@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 7535693297530190531}
   - component: {fileID: 7813599806078158266}
   - component: {fileID: 6716398019567333781}
-  - component: {fileID: 4226679823562383264}
   - component: {fileID: 6294491417654291472}
   - component: {fileID: 8544348809858642378}
+  - component: {fileID: 916987812567389148}
+  - component: {fileID: 4323594437188888350}
   m_Layer: 0
   m_Name: wire
   m_TagString: Untagged
@@ -77,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b5eb13e23ecdcf54c937e222c403adfa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bed2dd60639b9fd46bcec2104faacc83, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4, y: 4}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -130,20 +131,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4226679823562383264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7112489958868091828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55869ccda9357664dbe1fd0ee26b4c81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myland: {fileID: 0}
-  landsource: {fileID: 0}
 --- !u!222 &6294491417654291472
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -181,3 +168,28 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &916987812567389148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112489958868091828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80de03761451f1d4cb6495dc2b7a9694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4323594437188888350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112489958868091828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55869ccda9357664dbe1fd0ee26b4c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myland: {fileID: 0}
