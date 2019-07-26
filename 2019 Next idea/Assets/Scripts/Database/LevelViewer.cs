@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameTool;
 using LitJson;
-
+using System;
 namespace DataBase
 {
     public class LevelViewer : UnitySingleton<LevelViewer>
@@ -23,8 +23,9 @@ namespace DataBase
            leveldata = JsonMapper.ToObject(level_data.text);
            level_id = leveldata[0]["MapID"].ToString();
            LandManager.Instance().ReadMap(level_id);
-            //todo:初始化对话
+           DialogViewer.Instance().InstalizeDialog(level_id);
            InstalizeCondition();
+           DialogViewer.Instance().RequestDialog(DialogState.LoadOver);
         }
         private void Update()
         {
