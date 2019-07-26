@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameTool;
 using DataBase;
-using System;
+using System.Linq;
 using LitJson;
 
 namespace DataBase
@@ -14,15 +14,29 @@ namespace DataBase
         StopCircuit,
         Null
     }
+    public enum PanelType
+    {
+        Ready,
+        Showing,
+        RequestStop,
+        Over,
+        Null
+    }
     public class DialogViewer : UnitySingleton<DialogViewer>
     {
+        internal string currname;
+        internal string currconv;
+        internal static int currentPos;
         private static bool showstory = true;
+        private int nextnum = 0;
         private static Dictionary<DialogState, List<string>> dialoglist = new Dictionary<DialogState, List<string>>();
         private static string dialog_path = "LevelCanvaDataBase/DialogData/";
         private JsonData dialog_data;
+        private DialogState dialogstate;
+        public PanelType paneltype;
         public void InstalizeDialog(string name)
         {
-            TextAsset asset = (TextAsset)Resources.Load(dialog_path + name, typeof(TextAsset));
+            TextAsset asset  = Resources.Load<TextAsset>(dialog_path+name);
             dialog_data = JsonMapper.ToObject(asset.text);
             string[] keys = GetJsonKeys(dialog_data[0]);
             for (int i = 0; i < keys.Length; i++)
@@ -32,8 +46,33 @@ namespace DataBase
         }
         private void ShowDialog(DialogState state)
         {
-            Debug.Log("showloadover" + state);
-            //todo:调用播放开关
+                dialogstate = state;
+                ShowOverProcess();
+                Debug.Log("showloadover" + state);
+                //todo:启用panel
+
+        }
+        internal void ShowOverProcess()
+        {
+            currentPos = 0;
+            paneltype = PanelType.Ready;
+            UpdateCurrConv();
+        }
+        private void UpdateCurrConv()
+        {
+            if(dialoglist[dialogstate].Count>nextnum)
+            {
+                string content = dialoglist[dialogstate][nextnum];
+                string[] contents = content.Split(':');
+                currname = contents.First();
+                currconv = contents.Last();
+                nextnum++;
+            }
+            else
+            {
+                paneltype = PanelType.Over;
+            }
+
         }
         /// <summary>
         /// 
@@ -41,10 +80,23 @@ namespace DataBase
         /// <param name="state"></param>
         public void RequestDialog(DialogState state)
         {
-            if (showstory)
+            if (showstory|| dialoglist.ContainsKey(state))
             {
                 ShowDialog(state);
+                paneltype = PanelType.Showing;
             }
+        }
+        public static void ShowPanel(GameObject thispanel)
+        {
+            thispanel.GetComponent<CanvasGroup>().alpha = 1;
+            thispanel.GetComponent<CanvasGroup>().interactable = true;
+            thispanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+        public static void HidePanel(GameObject thispanel)
+        {
+            thispanel.GetComponent<CanvasGroup>().alpha = 0;
+            thispanel.GetComponent<CanvasGroup>().interactable = false;
+            thispanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
         /// <summary>
         /// 字符串转换为枚举类型
