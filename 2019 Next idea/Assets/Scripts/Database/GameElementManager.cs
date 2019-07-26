@@ -19,6 +19,15 @@ namespace DataBase
             string[] state = name.Split('_');
             GameObject element = (GameObject)Instantiate(Resources.Load(elementprefabpath + state[0], typeof(GameObject)));
             //todo:检测元件是否存在特殊状态，如有则处理
+            switch(state[0])
+            {
+                case "light":
+                    if(state.Length>1)
+                    {
+                        element.GetComponent<LightElement>().SetLight_ID(name);
+                    }
+                    break;
+            }
             element.transform.SetParent(land.transform);
             element.transform.localPosition = new Vector3(0,0, - 0.1f);
             land.GetComponent<BaseLand>().myelement = land.GetComponentInChildren<Element>();

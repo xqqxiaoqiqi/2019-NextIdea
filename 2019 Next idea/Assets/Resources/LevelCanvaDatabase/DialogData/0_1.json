@@ -1,0 +1,19 @@
+﻿[
+  {
+    "LoadOver": [
+      {
+        "_0": "Texture@something:contentadaadadadadadadadadadadadadad",
+        "_1": "Texture@something:content大大大大"
+      }
+
+
+    ],
+    "StopCircuit": [
+      {
+        "0": "0,0,0,0,0",
+        "1": "1,1,1,1,1"
+      }
+    ]
+
+  }
+]
