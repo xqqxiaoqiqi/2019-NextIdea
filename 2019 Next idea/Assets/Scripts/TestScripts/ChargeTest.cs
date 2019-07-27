@@ -30,7 +30,7 @@ namespace DataBase
         }
         public void AddElementTest()
         {
-            GameElementManager.Instance().AddElement(test, "wire");
+            GameElementManager.Instance().RequestAddElement(test, "wire");
         }
 
         public void ChargerCancelTest()

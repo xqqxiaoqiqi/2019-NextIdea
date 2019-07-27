@@ -12,6 +12,7 @@ namespace GameTool
         public BaseLand leftnode;
         public BaseLand rightnode;
         public BaseLand bottomnode;
+        public bool moveable;
         public Stack<int> stepstack = new Stack<int>();
         /// <summary>
         /// 地格上层元件的引用

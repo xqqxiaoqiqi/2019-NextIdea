@@ -15,29 +15,50 @@ namespace DataBase
         /// </summary>
         /// <param name="land"></param>
         /// <param name="name"></param>
+        public void RequestAddElement(GameObject land, string name)
+        {
+            if (land.GetComponent<BaseLand>().moveable)
+            {
+                AddElement(land, name);
+            }
+            else
+            {
+                Debug.Log("you cannot do this");
+            }
+
+
+        }
         public void AddElement(GameObject land, string name)
         {
             string[] state = name.Split('_');
             GameObject element = (GameObject)Instantiate(Resources.Load(elementprefabpath + state[0], typeof(GameObject)));
             //todo:检测元件是否存在特殊状态，如有则处理
-            switch(state[0])
+            switch (state[0])
             {
                 case "light":
-                    if(state.Length>1)
+                    if (state.Length > 1)
                     {
                         element.GetComponent<LightElement>().SetLight_ID(name);
                     }
                     break;
             }
             element.transform.SetParent(land.transform);
-            element.transform.localPosition = new Vector3(0,0, - 0.1f);
+            element.transform.localPosition = new Vector3(0, 0, -0.1f);
             land.GetComponent<BaseLand>().myelement = land.GetComponentInChildren<Element>();
             element.GetComponent<Element>().SetMyLand();
 
         }
         public void RemoveElement(GameObject element)
         {
-            element.GetComponent<Element>().RequestDestroy();
+            if(element.GetComponent<Element>().myland.moveable)
+            {
+                element.GetComponent<Element>().RequestDestroy();
+                DialogViewer.Instance().RequestDialog(DialogState.RemoveElement);
+            }
+            else
+            {
+                Debug.Log("you cannot do this");
+            }
         }
     }
 }
