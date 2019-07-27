@@ -9,28 +9,39 @@ namespace GameTool
         public static List<NormalCharger> allnormalchargers = new List<NormalCharger>();
         private  void Awake()
         {
+            element_ID = "normalcharger";
             allnormalchargers.Add(this);
-            isactive = true;
         }
         /// <summary>
         /// 充能器被激活，如果被其他元件激活，则反相信号
         /// </summary>
-        /// <param name="source"></param>
-        public override void OnActive(BaseLand source)
+        /// <param name="lastland"></param>
+        public override void OnActive(BaseLand lastland,Element source)
         {
-            if(source!=null)
+            if(lastland!=null)
             {
-                isactive = false;
-                //todo:反相信号。
+                myland.sourcelist.Clear();
             }
             else
             {
-                    BeActive();
+                base.OnActive(lastland, source);
             }
         }
-        public override void BeforeRequestCharge(BaseLand land)
+        public override void OnSilence(BaseLand lastland, Element source)
         {
-                belangland.RequestOnCharge(land, this);
+            if(lastland!=null)
+            {
+                //base.OnActive(source, land);
+            }
+            else
+            {
+                base.OnSilence(lastland, source);
+            }
+        }
+        public override void UpdateTexture()
+        {
+            GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + element_ID,typeof(Sprite));
+            GetComponent<ElementParticle>().UpdateParticleType(element_ID);
         }
     }
 }

@@ -1,4 +1,0 @@
-land|normalcharger,land|wire,land|wire,land|wire
-land|wire,land|wire,null,land|wire
-land,null,land,land|wire
-land,null,land,null

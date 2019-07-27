@@ -9,13 +9,13 @@ namespace DataBase
     {
         private static Dictionary<Vector2, BaseLand> landmap = new Dictionary<Vector2, BaseLand>();
         private TextAsset mapdata;
-        private string datapath = "LevelCanvaDatabase/";
+        private string datapath = "LevelCanvaDatabase/MapData/";
         private string landprefabpath = "GamePrefabs/GroundPrefab/";
         private void Awake()
         {
-            ReadMap("landtestdata");
+            //ReadMap("landtestdata");
         }
-        private void ReadMap(string mapname)
+        internal void ReadMap(string mapname)
         {
             mapdata = Resources.Load(datapath + mapname, typeof(TextAsset)) as TextAsset;
             if(mapdata!=null)
@@ -31,13 +31,16 @@ namespace DataBase
                         {
                             string[] datadetail = elementdata[j].Split('|');
                             GameObject land = (GameObject)Instantiate(Resources.Load(landprefabpath + datadetail[0], typeof(GameObject)));
+                            land.transform.SetParent(GameObject.FindGameObjectWithTag("GameMap").transform);
                             land.transform.position = new Vector2(j, lines.Length-1-i);
+                            land.name = "land" + land.transform.position.ToString();
                             landmap.Add(land.transform.position, land.GetComponent<BaseLand>());
+                            land.GetComponent<BaseLand>().UpdateLandParameter();
                             try
                             {
                                 if (datadetail[1] != null)
                                 {
-                                    ElementManager.Instance().AddElement(land, datadetail[1]);
+                                    GameElementManager.Instance().AddElement(land, datadetail[1]);
                                 }
                             }
                             catch
@@ -45,16 +48,17 @@ namespace DataBase
                                 //donothinghere
                             }
                         }
+                        
                     }
                 }
             }
-            SetBorderNode();
+           // SetBorderNode();
         }
         private void SetBorderNode()
         {
             foreach (BaseLand land in landmap.Values)
             {
-                land.UpdateParameter();
+                land.UpdateLandParameter();
             }
         }
         public static BaseLand GetLand(Vector2 vector)

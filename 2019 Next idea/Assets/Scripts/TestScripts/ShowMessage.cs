@@ -14,43 +14,40 @@ public class ShowMessage : MonoBehaviour
     }
     public void GetSourcesMessage()
     {
-        //Debug.Log("可用地格充能源（元件）：");
-        for (int i = 0; i < GetComponent<BaseLand>().inputelements.Count; i++)
-        {
-            if (GetComponent<BaseLand>().inputelements[i] != null)
-            {
-                //Debug.Log(GetComponent<BaseLand>().inputelements[i]);
-            }
-            else
-            {
-              //  Debug.Log("none");
-            }
 
-        }
+        //Debug.Log("inputlist：");
+        //for (int i = 0; i < GetComponent<BaseLand>().inputlist.Count; i++)
+        //{
+        //    if (GetComponent<BaseLand>().inputlist[i] != null)
+        //    {
+
+        //        Debug.Log(GetComponent<BaseLand>().inputlist[i]);
+        //    }
+        //    else
+        //    {
+        //      //  Debug.Log("none");
+        //    }
+
+        //}
 
         if (GetComponentInChildren<Element>() != null)
         {
             //Debug.Log("元件激活源（地格）：");
-            if (GetComponentInChildren<Element>().landsource!=null)
-            {
-                //for(int j=0; j< GetComponentInChildren<Element>().landsources.Count; j++)
-                //{
-                    Debug.Log(GetComponentInChildren<Element>().landsource);
+            //if (GetComponentInChildren<Element>().landsource!=null)
+            //{
+            //        Debug.Log(GetComponentInChildren<Element>().landsource);
+            //}
+            //else
+            //{
+            //   // Debug.Log("none");
+            //}
+            Debug.Log("元件激活源：");
 
-                //}
-
-            }
-            else
+            if (GetComponent<BaseLand>().sourcelist != null)
             {
-               // Debug.Log("none");
-            }
-           // Debug.Log("元件激活地格（输出）：");
-
-            if (GetComponentInChildren<Element>().outputlands != null)
-            {
-                for(int j=0; j< GetComponentInChildren<Element>().outputlands.Count; j++)
+                for(int j=0; j< GetComponent<BaseLand>().sourcelist.Count; j++)
                 {
-                Debug.Log(GetComponentInChildren<Element>().outputlands[j]);
+                Debug.Log(GetComponent<BaseLand>().sourcelist[j]);
 
                 }
             }

@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 6512725834044310765}
   - component: {fileID: 2313162200302534246}
   - component: {fileID: 251930727257667686}
-  m_Layer: 0
+  - component: {fileID: 6082989362244860123}
+  m_Layer: 8
   m_Name: normalcharger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1d3b1706d74421247aa4aeb7c097a93a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42728a3cf8e332d44a7bbcc89f6d55fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2997b39d8c5884d9a8520b46c9f724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landsources: []
+  myland: {fileID: 0}
 --- !u!222 &2313162200302534246
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -137,3 +138,15 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &6082989362244860123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4785733818896753981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80de03761451f1d4cb6495dc2b7a9694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
