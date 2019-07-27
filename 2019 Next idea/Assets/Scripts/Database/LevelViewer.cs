@@ -35,7 +35,7 @@ namespace DataBase
             if(isactive)
             {
                 timer += Time.deltaTime;
-                if (timer >= 3.0f)
+                if (timer >= 0.5f)
                 {
                     CheckCondition();;
                 }
@@ -117,6 +117,7 @@ namespace DataBase
                     haspassed = true;
                     Debug.Log("Pass");
                     DialogViewer.Instance().RequestDialog(DialogState.Pass);
+                    LevelManager.Instance().UpdateRateList(level_id, true);
                     //todo:通关处理
                 }
 
