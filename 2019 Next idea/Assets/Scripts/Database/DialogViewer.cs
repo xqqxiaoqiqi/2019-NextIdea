@@ -12,6 +12,11 @@ namespace DataBase
     {
         LoadOver,
         StopCircuit,
+        Pass,
+        RemoveElement,
+        AddElement,
+        StartCircuit,
+
         Null
     }
     public enum PanelType
@@ -27,12 +32,12 @@ namespace DataBase
         internal string currname;
         internal string currconv;
         internal static int currentPos;
-        private static bool showstory = true;
-        private int nextnum = 0;
-        private static Dictionary<DialogState, List<string>> dialoglist = new Dictionary<DialogState, List<string>>();
-        private static string dialog_path = "LevelCanvaDataBase/DialogData/";
-        private JsonData dialog_data;
-        private DialogState dialogstate;
+        protected static bool showstory = true;
+        protected int nextnum = 0;
+        protected static Dictionary<string, List<string>> dialoglist = new Dictionary<string, List<string>>();
+        protected static string dialog_path = "LevelCanvaDataBase/DialogData/";
+        protected JsonData dialog_data;
+        protected string dialogstate;
         public PanelType paneltype;
         public void InstalizeDialog(string name)
         {
@@ -41,10 +46,10 @@ namespace DataBase
             string[] keys = GetJsonKeys(dialog_data[0]);
             for (int i = 0; i < keys.Length; i++)
             {                
-                dialoglist.Add(ChangeToEnum(keys[i]), GetValue(dialog_data[0][keys[i]][0]));
+                dialoglist.Add(keys[i], GetValue(dialog_data[0][keys[i]][0]));
             }
         }
-        private void ShowDialog(DialogState state)
+        protected virtual void ShowDialog(string state)
         {
                 dialogstate = state;
                 ShowOverProcess();
@@ -58,7 +63,7 @@ namespace DataBase
             paneltype = PanelType.Ready;
             UpdateCurrConv();
         }
-        private void UpdateCurrConv()
+        protected void UpdateCurrConv()
         {
             if(dialoglist[dialogstate].Count>nextnum)
             {
@@ -71,6 +76,9 @@ namespace DataBase
             else
             {
                 paneltype = PanelType.Over;
+                //每个对话只会出现一次
+                dialoglist.Remove(dialogstate);
+                nextnum = 0;
             }
 
         }
@@ -78,11 +86,11 @@ namespace DataBase
         /// 
         /// </summary>
         /// <param name="state"></param>
-        public void RequestDialog(DialogState state)
+        public virtual void RequestDialog(DialogState state)
         {
-            if (showstory|| dialoglist.ContainsKey(state))
+            if (showstory&& dialoglist.ContainsKey(state.ToString()))
             {
-                ShowDialog(state);
+                ShowDialog(state.ToString());
                 paneltype = PanelType.Showing;
             }
         }
@@ -103,7 +111,7 @@ namespace DataBase
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        private DialogState ChangeToEnum(string name)
+        protected DialogState ChangeToEnum(string name)
         {
             switch (name)
             {
@@ -120,7 +128,7 @@ namespace DataBase
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        private string[] GetJsonKeys(JsonData data)
+        protected string[] GetJsonKeys(JsonData data)
         {
             IDictionary dictionary = (IDictionary)data;
             List<string> keys = new List<string>();
@@ -135,7 +143,7 @@ namespace DataBase
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        private List<string> GetValue(JsonData key)
+        protected List<string> GetValue(JsonData key)
         {
             List<string> values = new List<string>();
             for (int i = 0; i < key.Count; i++)

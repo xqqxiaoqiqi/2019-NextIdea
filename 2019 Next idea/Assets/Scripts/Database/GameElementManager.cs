@@ -46,6 +46,7 @@ namespace DataBase
             element.transform.localPosition = new Vector3(0, 0, -0.1f);
             land.GetComponent<BaseLand>().myelement = land.GetComponentInChildren<Element>();
             element.GetComponent<Element>().SetMyLand();
+            DialogViewer.Instance().RequestDialog(DialogState.AddElement);
 
         }
         public void RemoveElement(GameObject element)

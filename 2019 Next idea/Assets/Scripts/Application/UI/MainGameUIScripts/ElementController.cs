@@ -178,8 +178,16 @@ public class ElementController : MonoBehaviour
 
     public void OpenSelectedPanel()
     {
+        float orthographicSizeMultiplier = 1f;
+        float size = Camera.main.orthographicSize / 3 * orthographicSizeMultiplier;
+
+        size = 1 / size;
+
+        ElementSelectedPanel.transform.localScale = new Vector3(size, size, size);
+
+        ElementSelectedPanel.transform.position = Camera.main.WorldToScreenPoint(SelectedElement.position) + new Vector3(-25, 30, 0) * size;
+
         ElementSelectedPanel.SetActive(true);
-        ElementSelectedPanel.transform.position = Camera.main.WorldToScreenPoint(SelectedElement.position) + new Vector3(-25, 30, 0);
     }
 
     public void CloseSelectedPanel()

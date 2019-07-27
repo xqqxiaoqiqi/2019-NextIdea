@@ -11,7 +11,7 @@ namespace DataBase
         public NormalCharger testcharger;
         public void Awake()
         {
-            LevelViewer.Instance().InstalizeLevel("0_1");
+            //LevelViewer.Instance().InstalizeLevel("0_1");
         }
         /// <summary>
         /// 电路运行

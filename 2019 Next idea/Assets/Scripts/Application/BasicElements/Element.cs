@@ -20,6 +20,7 @@ namespace GameTool
         protected static string disable_texturepath = "Texture/ElementsTexture/Disable/";
         protected string element_ID;
         protected static Dictionary<Vector3, Element> elementlist = new Dictionary<Vector3, Element>();
+        protected bool rotateable;
         /// <summary>
         /// 被激活时调用，更换材质播放特效并调用BeActive
         /// </summary>
