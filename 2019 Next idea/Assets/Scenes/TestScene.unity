@@ -1092,6 +1092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5558d32c389c5439d54929abd9b2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ElementList: []
   ElementSlotList: []
   controller: {fileID: 521978004}
 --- !u!1 &521978003
