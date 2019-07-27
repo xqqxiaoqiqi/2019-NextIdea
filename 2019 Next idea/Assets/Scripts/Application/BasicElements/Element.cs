@@ -150,5 +150,15 @@ namespace GameTool
             }
             return false;
         }
+        public void RequestDestroy()
+        {
+            elementlist.Remove(this.transform.position);
+            UpdateTexture();
+            UpdateNearTexture(myland.topnode);
+            UpdateNearTexture(myland.bottomnode);
+            UpdateNearTexture(myland.leftnode);
+            UpdateNearTexture(myland.rightnode);
+            GameObject.Destroy(this.gameObject);
+        }
     }
 }
