@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4191550817601529147}
   - component: {fileID: 4191550817601529149}
   - component: {fileID: 4191550817601529148}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ef_liudong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4709,7 +4709,7 @@ GameObject:
   - component: {fileID: 4191550818245247879}
   - component: {fileID: 4191550818245247897}
   - component: {fileID: 4191550818245247896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ef_liudong 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9405,7 +9405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4191550818353452303}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wire_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9439,7 +9439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5359986464279244310}
   - component: {fileID: 3896871710515377776}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: SE
   m_TagString: Untagged
   m_Icon: {fileID: 0}

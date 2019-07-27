@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2313162200302534246}
   - component: {fileID: 251930727257667686}
   - component: {fileID: 6082989362244860123}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: normalcharger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
