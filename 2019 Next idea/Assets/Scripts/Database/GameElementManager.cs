@@ -10,7 +10,8 @@ namespace DataBase
         private static string elementprefabpath = "GamePrefabs/ElementPrefab/";
 
         /// <summary>
-        /// 根据配置文件初始化元件
+        /// 初始化指定元件到传入gameobject的子节点。
+        /// 测试的时候name赋值“wire”就可以。
         /// </summary>
         /// <param name="land"></param>
         /// <param name="name"></param>
@@ -33,6 +34,10 @@ namespace DataBase
             land.GetComponent<BaseLand>().myelement = land.GetComponentInChildren<Element>();
             element.GetComponent<Element>().SetMyLand();
 
+        }
+        public void RemoveElement(GameObject element)
+        {
+            element.GetComponent<Element>().RequestDestroy();
         }
     }
 }

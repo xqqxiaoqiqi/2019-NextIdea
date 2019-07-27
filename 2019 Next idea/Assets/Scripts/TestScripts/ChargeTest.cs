@@ -41,6 +41,10 @@ namespace DataBase
         {
             testcharger.OnActive(null, null);
         }
+        public void RemoveElementTest()
+        {
+            GameElementManager.Instance().RemoveElement(test);
+        }
     }
     }
 
