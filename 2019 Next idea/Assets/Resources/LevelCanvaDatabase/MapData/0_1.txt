@@ -1,4 +1,4 @@
 land|light_1,land|wire,land|wire,land,land
-land|wire,land|wire,land|wire,land,land|light_0
-land,null,land|wire,land,land
+land,land|wire,land|wire,land,land|light_0
+land,null,land|wire,land,land|wire
 land,land|wire,land|wire,land|wire,land|normalcharger

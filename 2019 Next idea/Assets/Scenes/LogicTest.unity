@@ -1689,7 +1689,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1988385979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4197a3556fcd56d48896bcd02cf4ccd1, type: 3}
+  m_Script: {fileID: 11500000, guid: c8d4575fb18438e48a8c743a37836ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   paneltype: 0
@@ -2211,6 +2211,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199911200715833167, guid: 97939266b009930489a7c59f080ebdc4,
+        type: 3}
+      propertyPath: charsPerSecond
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97939266b009930489a7c59f080ebdc4, type: 3}

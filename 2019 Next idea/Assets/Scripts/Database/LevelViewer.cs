@@ -17,6 +17,7 @@ namespace DataBase
         private static JsonData leveldata;
         private static string level_id;
         private string leveldata_path = "LevelCanvaDataBase/LevelData/";
+        private static bool haspassed;
         internal void InstalizeLevel(string id)
         {
            TextAsset level_data = (TextAsset)Resources.Load(leveldata_path+id, typeof(TextAsset));
@@ -25,6 +26,7 @@ namespace DataBase
            LandManager.Instance().ReadMap(level_id);
            DialogViewer.Instance().InstalizeDialog(level_id);
            InstalizeCondition();
+           haspassed = false;
            CircuitStart();
            DialogViewer.Instance().RequestDialog(DialogState.LoadOver);
         }
@@ -49,7 +51,9 @@ namespace DataBase
             {
                 NormalCharger.allnormalchargers[i].OnActive(null, null);
             }
-            isactive = true;           
+            isactive = true;
+            DialogViewer.Instance().RequestDialog(DialogState.StartCircuit);
+
         }
         /// <summary>
         /// 电路关闭
@@ -65,6 +69,7 @@ namespace DataBase
                 processingcondition[element.GetLight_ID()].Clear();
             }
             isactive = false;
+            DialogViewer.Instance().RequestDialog(DialogState.StopCircuit);
         }
         private static void InstalizeCondition()
         {
@@ -107,8 +112,14 @@ namespace DataBase
             }
             if(ConditionCompare())
             {
-                Debug.Log("Pass");
-                //todo:通关处理
+                if(!haspassed)
+                {
+                    haspassed = true;
+                    Debug.Log("Pass");
+                    DialogViewer.Instance().RequestDialog(DialogState.Pass);
+                    //todo:通关处理
+                }
+
             }
         }
         public  static bool ConditionCompare()
