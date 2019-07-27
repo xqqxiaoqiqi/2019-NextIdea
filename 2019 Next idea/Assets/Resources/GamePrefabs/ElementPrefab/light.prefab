@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8480650941411261003}
   - component: {fileID: 1124500704563599453}
   - component: {fileID: 1123672530019105277}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,3 +193,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myland: {fileID: 0}
+  state: 0

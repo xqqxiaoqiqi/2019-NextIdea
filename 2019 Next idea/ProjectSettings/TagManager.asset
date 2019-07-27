@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wire
   - Land
+  - GameMap
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
+  - GameMap
   - Background
   - 
   - 
@@ -40,6 +41,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: GameMap
+    uniqueID: 836714825
+    locked: 0
+  - name: UI
+    uniqueID: 3386854589
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1886719283
     locked: 0

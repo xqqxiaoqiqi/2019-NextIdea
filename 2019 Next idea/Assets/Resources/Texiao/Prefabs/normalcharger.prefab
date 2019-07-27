@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 209147414878544921}
   - component: {fileID: 209147414878544919}
   - component: {fileID: 209147414878544920}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ef_shnadian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4709,7 +4709,7 @@ GameObject:
   - component: {fileID: 209147414933699034}
   - component: {fileID: 209147414933699032}
   - component: {fileID: 209147414933699033}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ef_glow03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9407,7 +9407,7 @@ GameObject:
   - component: {fileID: 209147415347331635}
   - component: {fileID: 209147415347331633}
   - component: {fileID: 209147415347331634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ef_glow02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14103,7 +14103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 209147415667181760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: normalcharger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14139,7 +14139,7 @@ GameObject:
   - component: {fileID: 209147415778893367}
   - component: {fileID: 209147415778893365}
   - component: {fileID: 209147415778893366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ef_glow01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
