@@ -10,10 +10,6 @@ using UnityEngine.SceneManagement;
 
 public class MainUIOperations : MonoBehaviour
 {
-    //TODO :: 后期专门建立SceneManager统一管理场景切换
-    private int MainSceneID = 1;
-    private int StartUpUISceneID = 0;
-
     [HideInInspector] public bool IsIntroPanelShowing = false;
     [SerializeField] private GameObject IntroductionPanel;
 
@@ -34,7 +30,7 @@ public class MainUIOperations : MonoBehaviour
 
     public void OnClickExitConfirmButton()
     {
-        SceneManager.LoadScene(StartUpUISceneID);
+        MySceneManager.JumpToStartUpScene();
     }
 
     public void OnClickExitCancelButton()
