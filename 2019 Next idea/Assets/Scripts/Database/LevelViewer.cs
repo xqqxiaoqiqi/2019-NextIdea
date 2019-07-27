@@ -25,6 +25,7 @@ namespace DataBase
            LandManager.Instance().ReadMap(level_id);
            DialogViewer.Instance().InstalizeDialog(level_id);
            InstalizeCondition();
+           CircuitStart();
            DialogViewer.Instance().RequestDialog(DialogState.LoadOver);
         }
         private void Update()
