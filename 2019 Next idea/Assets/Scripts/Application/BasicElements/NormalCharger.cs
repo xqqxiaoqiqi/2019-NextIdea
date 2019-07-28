@@ -24,7 +24,15 @@ namespace GameTool
             }
             else
             {
+                if (source == null)
+                {
+                    processingsource.Push(this);
+                }
                 base.OnActive(lastland, source);
+                if (processingsource.Peek().Equals(this))
+                {
+                    processingsource.Pop();
+                }
             }
         }
         public override void OnSilence(BaseLand lastland, Element source)
@@ -35,7 +43,15 @@ namespace GameTool
             }
             else
             {
+                if (source == null)
+                {
+                    processingsource.Push(this);
+                }
                 base.OnSilence(lastland, source);
+                if (processingsource.Peek().Equals(this))
+                {
+                    processingsource.Pop();
+                }
             }
         }
         public override void UpdateTexture()

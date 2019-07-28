@@ -9,7 +9,7 @@ public class ElementParticle : MonoBehaviour
     private GameObject myparticle;
     public void UpdateParticleType(string name)
     {
-        if(!name.Equals(particlename))
+        if (!name.Equals(particlename))
         {
             particlename = name;
             RemoveParticlePrefab();
@@ -18,17 +18,34 @@ public class ElementParticle : MonoBehaviour
     }
     public void PlayParticle()
     {
-        myparticle.SetActive(true);
+        if (myparticle != null)
+        {
+            myparticle.SetActive(true);
+        }
     }
     public void StopParticle()
     {
-        myparticle.SetActive(false);
+        if (myparticle != null)
+        {
+            myparticle.SetActive(false);
+        }
     }
     private void AddParticlePrefab()
     {
-        myparticle = (GameObject)Instantiate(Resources.Load(particlepath + particlename, typeof(GameObject)));
-        myparticle.transform.SetParent(gameObject.transform);
-        myparticle.transform.localPosition = Vector3.zero;
+        try
+        {
+            myparticle = (GameObject)Instantiate(Resources.Load(particlepath + particlename, typeof(GameObject)));
+        }
+        catch
+        {
+
+        }
+        if (myparticle != null)
+        {
+            myparticle.transform.SetParent(gameObject.transform);
+            myparticle.transform.localPosition = Vector3.zero;
+        }
+
     }
     private void RemoveParticlePrefab()
     {

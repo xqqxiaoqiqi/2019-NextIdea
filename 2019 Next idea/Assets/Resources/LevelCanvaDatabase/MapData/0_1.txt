@@ -1,4 +1,4 @@
-land|light_1,land|wire,land|wire,land,land
-land,land|wire,land|wire,land,land|light_0
-land,null,land|wire,land,moveableland|wire
-land,land|wire,moveableland|wire,land|wire,land|normalcharger
+land|light_1,land|wire,land|repeater_0,land|wire,land|wire,land|light_0
+land,land|repeater_-270,land,land,land|repeater_-90
+land,land|wire,land|repeater_-180,land|wire,land|wire
+land,land,moveableland,land,land|normalcharger

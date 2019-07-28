@@ -32,7 +32,7 @@ namespace DataBase
         internal string currname;
         internal string currconv;
         internal static int currentPos;
-        protected static bool showstory = true;
+        protected static bool showstory = false;
         protected int nextnum = 0;
         protected static Dictionary<string, List<string>> dialoglist = new Dictionary<string, List<string>>();
         protected static string dialog_path = "LevelCanvaDataBase/DialogData/";

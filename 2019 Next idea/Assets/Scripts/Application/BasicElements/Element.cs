@@ -15,27 +15,23 @@ namespace GameTool
         /// <summary>
         /// 元件激活源
         /// </summary>
-        public static Element processingsource;
+        public static Stack<Element> processingsource = new Stack<Element>();
         protected static string enable_texturepath = "Texture/ElementsTexture/Enable/";
         protected static string disable_texturepath = "Texture/ElementsTexture/Disable/";
         protected string element_ID;
         protected static Dictionary<Vector3, Element> elementlist = new Dictionary<Vector3, Element>();
-        protected bool rotateable;
+        public bool rotateable=false;
         /// <summary>
         /// 被激活时调用，更换材质播放特效并调用BeActive
         /// </summary>
         public virtual void OnActive( BaseLand lastland,Element source )
         {
             //landsource是干啥的？？？？？
-            if (source == null)
-            {
-                processingsource = this;
-            }
-
             BeActive(lastland);
             isactive = true;
             GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load(enable_texturepath + element_ID, typeof(Sprite));
             GetComponent<ElementParticle>().PlayParticle();
+
         }
         /// <summary>
         /// 处理激活时的标号和广播
@@ -64,19 +60,24 @@ namespace GameTool
             myland.stepstack.Pop();
 
         }
-
+        /// <summary>
+        /// 旋转时调用
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool RequestRotate()
+        {
+            if(rotateable)
+            {
+                return true;
+            }
+            return false;
+        }
         /// <summary>
         /// 被取消激活时调用，更换材质关掉特效并调用BeSilence
         /// </summary>
         /// <param name="lastland"></param>
         public virtual void OnSilence(BaseLand lastland,Element source)
         {
-            //landsource是干啥的？？？？？
-            if (source == null)
-            {
-                processingsource = this;
-            }
-
             BeSilence(lastland);
             //材质更新，todo:特效播放
             if(lastland==null||myland.sourcelist.Count==0)
@@ -115,7 +116,7 @@ namespace GameTool
         /// 获取所在地格引用
         /// </summary>
         /// <returns></returns>
-        public bool SetMyLand()
+        public virtual bool InstalizeThisElement()
         {
             myland = GetComponentInParent<BaseLand>();
 
@@ -161,5 +162,6 @@ namespace GameTool
             UpdateNearTexture(myland.rightnode);
             GameObject.Destroy(this.gameObject);
         }
+
     }
 }

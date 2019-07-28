@@ -41,11 +41,17 @@ namespace DataBase
                         element.GetComponent<LightElement>().SetLight_ID(name);
                     }
                     break;
+                case "repeater":
+                    if(state.Length>1)
+                    {
+                        element.GetComponent<Transform>().Rotate(new Vector3(0, 0, int.Parse(state[1])));
+                    }
+                    break;
             }
             element.transform.SetParent(land.transform);
             element.transform.localPosition = new Vector3(0, 0, -0.1f);
             land.GetComponent<BaseLand>().myelement = land.GetComponentInChildren<Element>();
-            element.GetComponent<Element>().SetMyLand();
+            element.GetComponent<Element>().InstalizeThisElement();
             DialogViewer.Instance().RequestDialog(DialogState.AddElement);
 
         }

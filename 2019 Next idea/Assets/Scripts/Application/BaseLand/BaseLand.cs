@@ -73,7 +73,7 @@ namespace GameTool
         {
             if(node!=null)
             {
-                if (node.myelement != null && node.stepstack.Count == 0)
+                if (node.stepstack.Count == 0)
                 {
                     node.RequestOnCharge(thisland);
                 }
@@ -89,9 +89,9 @@ namespace GameTool
         /// <param name="sourceelement"></param>
         public bool RequestOnCharge(BaseLand lastland)
         {
-                if (!sourcelist.Contains(Element.processingsource))
+                if (!sourcelist.Contains(Element.processingsource.Peek()))
                 {
-                    sourcelist.Add(Element.processingsource);
+                    sourcelist.Add(Element.processingsource.Peek());
                     OnCharge(lastland);
                     return true;
                 }
@@ -109,7 +109,7 @@ namespace GameTool
             //如果上层元件不为空，则激活这个元件
             if (myelement != null)
             {
-                myelement.OnActive(lastland, Element.processingsource);
+                myelement.OnActive(lastland, Element.processingsource.Peek());
             }
             return true;
         }
@@ -135,9 +135,9 @@ namespace GameTool
         {
             if (lastland != null)
             {
-                if (sourcelist.Contains(Element.processingsource))
+                if (sourcelist.Contains(Element.processingsource.Peek()))
                 {
-                    sourcelist.Remove(Element.processingsource);
+                    sourcelist.Remove(Element.processingsource.Peek());
                     CancelCharge(lastland);
                     return true;
                 }
@@ -152,7 +152,7 @@ namespace GameTool
             hascharged = false;
             if (myelement != null)
             {
-                myelement.OnSilence(lastland, Element.processingsource);
+                myelement.OnSilence(lastland, Element.processingsource.Peek());
             }
             return true;
 
