@@ -1,37 +1,64 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LitJson;
 
 namespace DataBase
 {
     public class LevelManager : UnitySingleton<LevelManager>
     {
         internal static Dictionary<string, bool> ratelist = new Dictionary<string, bool>();
-        public GameObject[] levels;
-        public GameObject resentviewer;
+        private static Dictionary<string, string> detaillist = new Dictionary<string, string>();
+        public GameObject[] levelviewers;
+        [SerializeField]
+        public static GameObject resentviewer;
+        public GameObject levelselectpanel;
+        public GameObject gamepanel;
+        private string detailpath = "LevelCanvaDataBase/LevelDescription/LevelDescription";
+        private JsonData detaildata;
+        [SerializeField]
+        public List<string> levelnums = new List<string>();
         private void Awake()
         {
-
-            ratelist.Add("0_1", false);
+            TextAsset asset = Resources.Load<TextAsset>(detailpath);
+            detaildata = JsonMapper.ToObject(asset.text);
+            for(int i=0;i<detaildata.Count;i++)
+            {
+                detaillist.Add(detaildata[i]["LevelID"].ToString(), detaildata[i]["Description"].ToString());
+            }
+            for(int i=0;i<levelnums.Count;i++)
+            {
+                ratelist.Add(levelnums[i], false);
+            }
         }
-        private void Start()
+        private int GetCount(string num)
         {
-            StartLevel(0, "0_1");
+            for (int i = 0; i < levelnums.Count; i++)
+            {
+               if(levelnums[i].Equals(num))
+                {
+                    return i;
+                }
+            }
+            return 10000;
         }
-        internal void StartLevel(int i,string name)
+        internal void StartLevel(string name)
         {
+            int i = GetCount(name);
             UpdateDialogViewer(i);
             LevelViewer.Instance().InstalizeLevel(name);
-
+            DialogViewer.HidePanel(levelselectpanel);
+            DialogViewer.ShowPanel(gamepanel);
         }
         internal void UpdateDialogViewer(int i)
         {
             if(resentviewer!=null)
             {
                 resentviewer.SetActive(false);
-                resentviewer = levels[i];
-                resentviewer.SetActive(true);
             }
+            resentviewer = levelviewers[i];
+            resentviewer.SetActive(true);
+
         }
         internal void UpdateRateList(string key,bool value)
         {
@@ -40,7 +67,14 @@ namespace DataBase
                 ratelist[key] = value;
             }
         }
-
+        public string RequestDetail(string num)
+        {
+            if(detaillist.ContainsKey(num))
+            {
+             return detaillist[num];
+            }
+            return "敬请期待";
+        }
     }
 
 }

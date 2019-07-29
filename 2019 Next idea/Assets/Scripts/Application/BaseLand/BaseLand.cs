@@ -33,9 +33,6 @@ namespace GameTool
         /// </summary>
         public bool hascharged;
         public Vector2 vector;
-        protected void Awake()
-        {
-        }
         /// <summary>
         /// 更新参数，因为涉及到布线问题，所以一个地格更新的事件时周围所有的地格都要更新结点
         /// </summary>

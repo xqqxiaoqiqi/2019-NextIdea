@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DataBase;
 
-namespace DataBase
+namespace GameGUI
 {
     public class ConvPanel : MonoBehaviour
     {
@@ -29,13 +30,13 @@ namespace DataBase
         }
         public void PanelOnclick()
         {
-            switch (DialogViewer.Instance().paneltype)
+            switch (LevelManager.resentviewer.GetComponent<DialogViewer>().paneltype)
             {
                 case PanelType.Ready:
-                    DialogViewer.Instance().paneltype = PanelType.Showing;
+                    LevelManager.resentviewer.GetComponent<DialogViewer>().paneltype = PanelType.Showing;
                     break;
                 case PanelType.Showing:
-                    DialogViewer.Instance().paneltype = PanelType.RequestStop;
+                    LevelManager.resentviewer.GetComponent<DialogViewer>().paneltype = PanelType.RequestStop;
                     break;
                 case PanelType.Over:
                     DialogViewer.HidePanel(this.gameObject);
@@ -47,32 +48,36 @@ namespace DataBase
         }
         private void TryShowConv()
         {
-            switch (DialogViewer.Instance().paneltype)
+            if(LevelManager.resentviewer!=null)
             {
-                case PanelType.Showing:
-                    nametext.text = DialogViewer.Instance().currname;
-                    if (DialogViewer.Instance().paneltype == PanelType.Showing)
-                    {
-                        DialogViewer.ShowPanel(this.gameObject);
-                        timer += Time.deltaTime;
-                        if (timer >= charsPerSecond)
+                switch (LevelManager.resentviewer.GetComponent<DialogViewer>().paneltype)
+                {
+                    case PanelType.Showing:
+                        nametext.text = LevelManager.resentviewer.GetComponent<DialogViewer>().currname;
+                        if (LevelManager.resentviewer.GetComponent<DialogViewer>().paneltype == PanelType.Showing)
                         {
-                            DialogViewer.currentPos++;
-                            timer = 0;
-                            convtext.text = DialogViewer.Instance().currconv.Substring(0, DialogViewer.currentPos);
-                            if (DialogViewer.currentPos >= DialogViewer.Instance().currconv.Length)
+                            DialogViewer.ShowPanel(this.gameObject);
+                            timer += Time.deltaTime;
+                            if (timer >= charsPerSecond)
                             {
-                                DialogViewer.Instance().ShowOverProcess();
+                                DialogViewer.currentPos++;
+                                timer = 0;
+                                convtext.text = LevelManager.resentviewer.GetComponent<DialogViewer>().currconv.Substring(0, DialogViewer.currentPos);
+                                if (DialogViewer.currentPos >= LevelManager.resentviewer.GetComponent<DialogViewer>().currconv.Length)
+                                {
+                                    LevelManager.resentviewer.GetComponent<DialogViewer>().ShowOverProcess();
+                                }
                             }
                         }
-                    }
-                    break;
-                case PanelType.RequestStop:
-                    convtext.text = DialogViewer.Instance().currconv;
-                    DialogViewer.Instance().ShowOverProcess();
-                    break;
-                default:
-                    break;
+                        break;
+                    case PanelType.RequestStop:
+                        convtext.text = LevelManager.resentviewer.GetComponent<DialogViewer>().currconv;
+                        LevelManager.resentviewer.GetComponent<DialogViewer>().ShowOverProcess();
+                        break;
+                    default:
+                        break;
+
+                }
 
             }
 

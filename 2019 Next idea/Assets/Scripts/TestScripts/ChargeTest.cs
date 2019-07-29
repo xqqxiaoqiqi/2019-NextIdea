@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GameTool;
+using DataBase;
 
-namespace DataBase
+namespace Test
 {
     public class ChargeTest : MonoBehaviour
     {
         public GameObject test;
         public NormalCharger testcharger;
-        public void Awake()
-        {
-            //LevelViewer.Instance().InstalizeLevel("0_1");
-        }
         /// <summary>
         /// 电路运行
         /// </summary>

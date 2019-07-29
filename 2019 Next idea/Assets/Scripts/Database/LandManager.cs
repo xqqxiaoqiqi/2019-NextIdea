@@ -11,10 +11,6 @@ namespace DataBase
         private TextAsset mapdata;
         private string datapath = "LevelCanvaDatabase/MapData/";
         private string landprefabpath = "GamePrefabs/GroundPrefab/";
-        private void Awake()
-        {
-            //ReadMap("landtestdata");
-        }
         internal void ReadMap(string mapname)
         {
             mapdata = Resources.Load(datapath + mapname, typeof(TextAsset)) as TextAsset;

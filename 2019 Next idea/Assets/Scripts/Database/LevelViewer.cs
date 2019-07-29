@@ -24,11 +24,11 @@ namespace DataBase
            leveldata = JsonMapper.ToObject(level_data.text);
            level_id = leveldata[0]["MapID"].ToString();
            LandManager.Instance().ReadMap(level_id);
-           DialogViewer.Instance().InstalizeDialog(level_id);
+            LevelManager.resentviewer.GetComponent<DialogViewer>().InstalizeDialog(level_id);
            InstalizeCondition();
            haspassed = false;
            CircuitStart();
-           DialogViewer.Instance().RequestDialog(DialogState.LoadOver);
+            LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.LoadOver);
         }
         private void Update()
         {
@@ -52,7 +52,7 @@ namespace DataBase
                 NormalCharger.allnormalchargers[i].OnActive(null, null);
             }
             isactive = true;
-            DialogViewer.Instance().RequestDialog(DialogState.StartCircuit);
+            LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.StartCircuit);
 
         }
         /// <summary>
@@ -69,7 +69,7 @@ namespace DataBase
                 processingcondition[element.GetLight_ID()].Clear();
             }
             isactive = false;
-            DialogViewer.Instance().RequestDialog(DialogState.StopCircuit);
+            LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.StopCircuit);
         }
         private static void InstalizeCondition()
         {
@@ -116,7 +116,7 @@ namespace DataBase
                 {
                     haspassed = true;
                     Debug.Log("Pass");
-                    DialogViewer.Instance().RequestDialog(DialogState.Pass);
+                    LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.Pass);
                     LevelManager.Instance().UpdateRateList(level_id, true);
                     //todo:通关处理
                 }
