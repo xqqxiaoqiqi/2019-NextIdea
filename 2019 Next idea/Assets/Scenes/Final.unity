@@ -229,11 +229,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 329343550566065155, guid: 97939266b009930489a7c59f080ebdc4,
-        type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 69427210}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97939266b009930489a7c59f080ebdc4, type: 3}
 --- !u!1 &50255606
@@ -365,18 +360,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50255606}
   m_CullTransparentMesh: 0
---- !u!114 &69427210 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 329343550566065156, guid: 97939266b009930489a7c59f080ebdc4,
-    type: 3}
-  m_PrefabInstance: {fileID: 14218463}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &77289236
 GameObject:
   m_ObjectHideFlags: 0
