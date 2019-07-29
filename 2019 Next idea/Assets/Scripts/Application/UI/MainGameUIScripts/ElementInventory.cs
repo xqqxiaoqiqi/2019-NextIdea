@@ -25,10 +25,7 @@ public class ElementInventory : MonoBehaviour
     {
 
         ElementList = new List<GameObject>();
-
-
-        AddElement("Wire");
-        AddElement("Wire");
+        
     }
 
     /// <summary>
@@ -48,7 +45,6 @@ public class ElementInventory : MonoBehaviour
 
                 ele.GetComponent<ElementUIController>().ElementsParent = ElementUIParent;
                 ele.GetComponent<ElementUIController>().inventory = this;
-
                 
 
                 UIManager.AddElement(ele);

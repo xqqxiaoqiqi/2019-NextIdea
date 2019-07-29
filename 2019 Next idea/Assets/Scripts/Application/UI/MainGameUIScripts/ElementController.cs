@@ -23,8 +23,7 @@ public class ElementController : MonoBehaviour
 
     private Vector3 OrigionPosition;
 
-    [SerializeField]
-    private GameObject ElementSelectedPanel;
+    public GameObject ElementSelectedPanel;
 
     [SerializeField]
     private ElementInventory inventory;
@@ -178,14 +177,14 @@ public class ElementController : MonoBehaviour
 
     public void OpenSelectedPanel()
     {
-        float orthographicSizeMultiplier = 1f;
-        float size = Camera.main.orthographicSize / 3 * orthographicSizeMultiplier;
+        float orthographicSizeMultiplier = 0.1f;
+        float size = Camera.main.orthographicSize * orthographicSizeMultiplier;
 
         size = 1 / size;
 
         ElementSelectedPanel.transform.localScale = new Vector3(size, size, size);
 
-        ElementSelectedPanel.transform.position = Camera.main.WorldToScreenPoint(SelectedElement.position) + new Vector3(-25, 30, 0) * size;
+        ElementSelectedPanel.transform.position = Camera.main.WorldToScreenPoint(SelectedElement.position) + new Vector3(-30, 30, 0) * size;
 
         ElementSelectedPanel.SetActive(true);
     }

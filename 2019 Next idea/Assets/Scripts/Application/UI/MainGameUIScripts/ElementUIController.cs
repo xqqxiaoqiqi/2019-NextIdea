@@ -22,7 +22,6 @@ public class ElementUIController : MonoBehaviour, IBeginDragHandler, IDragHandle
     [HideInInspector]
     public Transform ElementsParent;
 
-    [HideInInspector]
     public GameObject WirePhysicPrefeb;
 
     private Dictionary<int, GameObject> m_DraggingIcons = new Dictionary<int, GameObject>();
@@ -115,10 +114,12 @@ public class ElementUIController : MonoBehaviour, IBeginDragHandler, IDragHandle
         {
             if (hit.transform && hit.transform.CompareTag("Land"))
             {
-                //Put the wire there
-                GameObject GO = Instantiate(WirePhysicPrefeb, InstantPos, Quaternion.Euler(Vector3.zero), ElementsParent) as GameObject;
-                GO.transform.parent = hit.transform;
-                GO.transform.localPosition = new Vector3(0, 0, -0.1f);
+                DataBase.GameElementManager.Instance().AddElement(hit.transform.gameObject , WirePhysicPrefeb.name);
+
+                ////Put the wire there
+                //GameObject GO = Instantiate(WirePhysicPrefeb, InstantPos, Quaternion.Euler(Vector3.zero), ElementsParent) as GameObject;
+                //GO.transform.parent = hit.transform;
+                //GO.transform.localPosition = new Vector3(0, 0, -0.1f);
 
                 inventory.RemoveElement(transform.gameObject);
             }
