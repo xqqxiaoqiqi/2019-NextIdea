@@ -1,42 +1,12 @@
 ﻿[
   {
-    "LoadOver": [
-      {
-        "_0": "Texture@something:contentadaadadadadadadadadadadadadad",
-        "_1": "Texture@something:content大大大大"
-      }
-
-
-    ],
-    "StopCircuit": [
-      {
-        "0": "StopCircuit0,0,0,0,0",
-        "1": "1,1,1,1,1"
-      }
-    ],
-    "StartCircuit": [
-      {
-        "0": "StartCircuit0,0,0,0,0",
-        "1": "1,1,1,1,1"
-      }
-    ],
-    "AddElement": [
-      {
-        "0": "AddElement0,0,0,0,0",
-        "1": "1,1,1,1,1"
-      }
-    ],
-    "RemoveElement": [
-      {
-        "0": "RemoveElement0,0,0,0,0",
-        "1": "1,1,1,1,1"
-      }
-    ],
-    "Pass": [
-      {
-        "0": "Pass0,0,0,0,0",
-        "1": "1,1,1,1,1"
-      }
-    ]
+    "LevelType": "Normal",
+    "LevelID": "0_1",
+    "Description": "这是第一关的描述"
+  },
+  {
+    "LevelType": "Special",
+    "LevelID": "0_2",
+    "Description": "这是第二关的描述"
   }
 ]
