@@ -52,7 +52,7 @@ namespace DataBase
             element.transform.localPosition = new Vector3(0, 0, -0.1f);
             land.GetComponent<BaseLand>().myelement = land.GetComponentInChildren<Element>();
             element.GetComponent<Element>().InstalizeThisElement();
-            DialogViewer.Instance().RequestDialog(DialogState.AddElement);
+            LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.AddElement);
 
         }
         public void RemoveElement(GameObject element)
@@ -60,7 +60,7 @@ namespace DataBase
             if(element.GetComponent<Element>().myland.moveable)
             {
                 element.GetComponent<Element>().RequestDestroy();
-                DialogViewer.Instance().RequestDialog(DialogState.RemoveElement);
+                LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.RemoveElement);
             }
             else
             {

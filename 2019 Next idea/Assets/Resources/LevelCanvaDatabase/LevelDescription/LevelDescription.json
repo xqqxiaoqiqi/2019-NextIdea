@@ -1,0 +1,12 @@
+﻿[
+  {
+    "LevelType": "Normal",
+    "LevelID": "0_1",
+    "Description": "这是第一关的描述"
+  },
+  {
+    "LevelType": "Special",
+    "LevelID": "0_2",
+    "Description": "这是第二关的描述"
+  }
+]

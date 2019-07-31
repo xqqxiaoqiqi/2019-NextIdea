@@ -27,12 +27,13 @@ namespace DataBase
         Over,
         Null
     }
-    public class DialogViewer : UnitySingleton<DialogViewer>
+    public class DialogViewer : MonoBehaviour
     {
         internal string currname;
         internal string currconv;
         internal static int currentPos;
-        protected static bool showstory = false;
+        [SerializeField]
+        protected static bool showstory = true;
         protected int nextnum = 0;
         protected static Dictionary<string, List<string>> dialoglist = new Dictionary<string, List<string>>();
         protected static string dialog_path = "LevelCanvaDataBase/DialogData/";
