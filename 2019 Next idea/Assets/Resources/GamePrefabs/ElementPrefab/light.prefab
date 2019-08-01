@@ -193,4 +193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myland: {fileID: 0}
+  elementname: light
+  rotateable: 0
   state: 0

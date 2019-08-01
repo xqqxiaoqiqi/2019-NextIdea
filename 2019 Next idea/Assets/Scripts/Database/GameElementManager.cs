@@ -17,7 +17,7 @@ namespace DataBase
         /// <param name="name"></param>
         public void RequestAddElement(GameObject land, string name)
         {
-            if (land.GetComponent<BaseLand>().moveable)
+            if (land.GetComponent<BaseLand>().interactable)
             {
                 AddElement(land, name);
             }
@@ -57,7 +57,7 @@ namespace DataBase
         }
         public void RemoveElement(GameObject element)
         {
-            if(element.GetComponent<Element>().myland.moveable)
+            if(element.GetComponent<Element>().myland.interactable)
             {
                 element.GetComponent<Element>().RequestDestroy();
                 LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.RemoveElement);

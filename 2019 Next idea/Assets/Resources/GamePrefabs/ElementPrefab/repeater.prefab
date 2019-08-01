@@ -150,4 +150,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myland: {fileID: 0}
+  elementname: repeater
   rotateable: 1

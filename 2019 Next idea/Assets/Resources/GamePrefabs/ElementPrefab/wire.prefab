@@ -193,3 +193,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myland: {fileID: 0}
+  elementname: wire
+  rotateable: 0

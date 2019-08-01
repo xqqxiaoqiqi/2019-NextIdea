@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myland: {fileID: 0}
+  elementname: normalcharger
   rotateable: 0
 --- !u!222 &2313162200302534246
 CanvasRenderer:

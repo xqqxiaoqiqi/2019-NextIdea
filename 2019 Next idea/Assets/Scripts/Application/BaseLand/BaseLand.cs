@@ -12,7 +12,7 @@ namespace GameTool
         public BaseLand leftnode;
         public BaseLand rightnode;
         public BaseLand bottomnode;
-        public bool moveable;
+        public bool interactable;
         public Stack<int> stepstack = new Stack<int>();
         /// <summary>
         /// 地格上层元件的引用
@@ -78,7 +78,6 @@ namespace GameTool
 
 
         }
-
         /// <summary>
         /// 元件尝试充能地格时调用
         /// </summary>
@@ -118,7 +117,7 @@ namespace GameTool
         {
             if (node != null)
             {
-                if (node.myelement != null && node.stepstack.Count == 0)
+                if (node.stepstack.Count == 0)
                 {
                     node.RequestCancelCharge(thisland);
                 }
@@ -154,7 +153,26 @@ namespace GameTool
             return true;
 
         }
+        public void OnClick()
+        {
+            if(LevelManager.setingelement)
+            {
+                if (interactable)
+                {
+                    if (myelement == null)
+                    {
+                        GameElementManager.Instance().AddElement(this.gameObject, LevelManager.choosingelement);
+                        LevelManager.Instance().AddElementDone();
+                    }
+                    else
+                    {
+                        Debug.Log("you can not do this");
+                    }
+                }
+            }
 
+
+        }
     }
 }
 

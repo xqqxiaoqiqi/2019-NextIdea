@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameGUI;
 
 namespace GameTool
 {
@@ -19,6 +20,7 @@ namespace GameTool
         protected static string enable_texturepath = "Texture/ElementsTexture/Enable/";
         protected static string disable_texturepath = "Texture/ElementsTexture/Disable/";
         protected string element_ID;
+        public string elementname;
         protected static Dictionary<Vector3, Element> elementlist = new Dictionary<Vector3, Element>();
         public bool rotateable=false;
         /// <summary>
@@ -155,6 +157,7 @@ namespace GameTool
         public void RequestDestroy()
         {
             elementlist.Remove(this.transform.position);
+            ElementsPanel.Instance().AddElement(this.elementname);
             UpdateTexture();
             UpdateNearTexture(myland.topnode);
             UpdateNearTexture(myland.bottomnode);

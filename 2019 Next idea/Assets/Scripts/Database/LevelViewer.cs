@@ -10,6 +10,7 @@ namespace DataBase
     {
         private List<int> outputlist = new List<int>();
         public static Dictionary<string, Queue<int>> successcondition = new Dictionary<string, Queue<int>>();
+        [SerializeField]
         public static Dictionary<string, Queue<int>> processingcondition = new Dictionary<string, Queue<int>>();
         public static int maxcheck = 5;
         private bool isactive = false;
