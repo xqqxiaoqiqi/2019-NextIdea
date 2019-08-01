@@ -22,7 +22,7 @@ namespace GameGUI
         {
             if(!LevelManager.setingelement)
             {
-                LevelManager.ChangeArrow();
+                LevelManager.Instance().ChangeArrow(name);
                 LevelManager.setingelement = true;
                 LevelManager.choosingelement = name;
                 ElementsPanel.RemoveElement(this.gameObject);

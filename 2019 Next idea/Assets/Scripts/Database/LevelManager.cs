@@ -4,6 +4,7 @@ using UnityEngine;
 using LitJson;
 using GameTool;
 using GameGUI;
+using UnityEngine.UI;
 
 namespace DataBase
 {
@@ -22,6 +23,7 @@ namespace DataBase
         public GameObject gamepanel;
         public ElementsPanel elementspanel;
         private string detailpath = "LevelCanvaDataBase/LevelDescription/LevelDescription";
+        private string arrowpath = "Texture/GameCursors/";
         private JsonData detaildata;
         [SerializeField]
         private static Element selectingelementname;
@@ -42,7 +44,12 @@ namespace DataBase
         }
         private void OnGUI()
         {
-            
+            if(choosingelement!=null)
+            {
+                var mousePos = Input.mousePosition;
+                arrow = (Texture2D)Resources.Load(arrowpath + choosingelement, typeof(Texture2D));
+                GUI.DrawTexture(new Rect(mousePos.x-arrow.width/2, Screen.height - mousePos.y - arrow.height / 2, arrow.width, arrow.height), arrow);
+            }
         }
         /// <summary>
         /// 获取关卡名在链表中的位置
@@ -113,16 +120,26 @@ namespace DataBase
         }
         public void AddElementDone()
         {
-            ChangeArrow();
+            ChangeArrow(null);
             choosingelement = null;
             setingelement = false;            
         }
         /// <summary>
         /// 更换鼠标指针材质
         /// </summary>
-        public static void ChangeArrow()
+        public void ChangeArrow(string name)
         {
-            //todo:实现
+            //if(name!=null)
+            //{
+            //    arrow = (Texture2D)Resources.Load(arrowpath+name, typeof(Texture2D));
+            //    Cursor.SetCursor(arrow, Vector2.zero, CursorMode.Auto);
+            //}
+            //else
+            //{
+            //    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+            //}
+
         }
     }
 
