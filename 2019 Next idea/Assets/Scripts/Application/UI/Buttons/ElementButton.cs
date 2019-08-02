@@ -10,7 +10,7 @@ namespace GameGUI
     {
         [SerializeField]
         //外部设置
-        private string name;
+        private string name = "default";
         private void Awake()
         {
             GetComponentInChildren<Button>().onClick.AddListener(OnClick);

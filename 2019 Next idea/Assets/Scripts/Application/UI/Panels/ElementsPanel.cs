@@ -14,7 +14,7 @@ namespace GameGUI
         private GameObject selectelement;
         private static string buttonprefab_path = "GamePrefabs/UIPrefab/Buttons/";
         private static List<string> elementlist = new List<string>();
-        private static Button cancelbutton;
+        public static Button cancelbutton;
         private JsonData elementdata;
         private static string elementdata_path = "";
         private void Awake()

@@ -12,29 +12,27 @@ public class CameraOperation : MonoBehaviour
     /// <summary>
     /// 镜头移动所需参数
     /// </summary>
-    private float LeftBorder;
-    private float RightBorder;
+    private float LeftBorder = 0;
+    private float RightBorder = 0;
     [SerializeField]
-    private float MoveSpeed;
+    private float MoveSpeed = 0;
     [SerializeField]
-    private float MovableInterval;
+    private float MovableInterval =0;
     /// <summary>
     /// 镜头缩放参数
     /// </summary>
     [SerializeField]
-    private float ZoomSpeed;
+    private float ZoomSpeed = 0;
     [SerializeField]
-    private float MinOrthoSize;
+    private float MinOrthoSize = 0;
     [SerializeField]
-    private float MaxOrthoSize;
-    [SerializeField]
-    private ElementController _ElementController;
+    private float MaxOrthoSize = 0;
 
     //判断当前状态下摄像机是否可以移动
     [HideInInspector]
-    public bool CanCameraMoving;
+    public bool CanCameraMoving=false;
 
-    [HideInInspector] public bool CanCameraZooming;
+    [HideInInspector] public bool CanCameraZooming=false;
 
     private Camera mainCamera;
 
@@ -74,13 +72,6 @@ public class CameraOperation : MonoBehaviour
     {
         //TODO :: 不可移动条件不完善
         if (!Input.GetMouseButton(0) || !CanCameraMoving) return;
-
-        //取消选中状态。
-        if (_ElementController != null)
-        {
-            _ElementController.ClearSelectedElement();
-            _ElementController.CanDrag = false;
-        }
 
         if (Input.GetAxis("Mouse X") > 0 && transform.position.x > LeftBorder)
         {
