@@ -18,7 +18,8 @@ namespace DataBase
         private Texture2D arrow;
         public GameObject[] levelviewers;
         [SerializeField]
-        public static GameObject resentviewer;
+        public static GameObject presentviewer;
+        public GameObject elementoperationpanel;
         public GameObject levelselectpanel;
         public GameObject gamepanel;
         public ElementsPanel elementspanel;
@@ -85,12 +86,12 @@ namespace DataBase
         /// <param name="i"></param>
         internal void UpdateDialogViewer(int i)
         {
-            if(resentviewer!=null)
+            if(presentviewer!=null)
             {
-                resentviewer.SetActive(false);
+                presentviewer.SetActive(false);
             }
-            resentviewer = levelviewers[i];
-            resentviewer.SetActive(true);
+            presentviewer = levelviewers[i];
+            presentviewer.SetActive(true);
 
         }
         /// <summary>
@@ -120,26 +121,8 @@ namespace DataBase
         }
         public void AddElementDone()
         {
-            ChangeArrow(null);
             choosingelement = null;
             setingelement = false;            
-        }
-        /// <summary>
-        /// 更换鼠标指针材质
-        /// </summary>
-        public void ChangeArrow(string name)
-        {
-            //if(name!=null)
-            //{
-            //    arrow = (Texture2D)Resources.Load(arrowpath+name, typeof(Texture2D));
-            //    Cursor.SetCursor(arrow, Vector2.zero, CursorMode.Auto);
-            //}
-            //else
-            //{
-            //    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-
-            //}
-
         }
     }
 

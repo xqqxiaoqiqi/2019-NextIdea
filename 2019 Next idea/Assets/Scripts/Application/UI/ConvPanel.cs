@@ -30,13 +30,13 @@ namespace GameGUI
         }
         public void PanelOnclick()
         {
-            switch (LevelManager.resentviewer.GetComponent<DialogViewer>().paneltype)
+            switch (LevelManager.presentviewer.GetComponent<DialogViewer>().paneltype)
             {
                 case PanelType.Ready:
-                    LevelManager.resentviewer.GetComponent<DialogViewer>().paneltype = PanelType.Showing;
+                    LevelManager.presentviewer.GetComponent<DialogViewer>().paneltype = PanelType.Showing;
                     break;
                 case PanelType.Showing:
-                    LevelManager.resentviewer.GetComponent<DialogViewer>().paneltype = PanelType.RequestStop;
+                    LevelManager.presentviewer.GetComponent<DialogViewer>().paneltype = PanelType.RequestStop;
                     break;
                 case PanelType.Over:
                     DialogViewer.HidePanel(this.gameObject);
@@ -48,13 +48,13 @@ namespace GameGUI
         }
         private void TryShowConv()
         {
-            if(LevelManager.resentviewer!=null)
+            if(LevelManager.presentviewer!=null)
             {
-                switch (LevelManager.resentviewer.GetComponent<DialogViewer>().paneltype)
+                switch (LevelManager.presentviewer.GetComponent<DialogViewer>().paneltype)
                 {
                     case PanelType.Showing:
-                        nametext.text = LevelManager.resentviewer.GetComponent<DialogViewer>().currname;
-                        if (LevelManager.resentviewer.GetComponent<DialogViewer>().paneltype == PanelType.Showing)
+                        nametext.text = LevelManager.presentviewer.GetComponent<DialogViewer>().currname;
+                        if (LevelManager.presentviewer.GetComponent<DialogViewer>().paneltype == PanelType.Showing)
                         {
                             DialogViewer.ShowPanel(this.gameObject);
                             timer += Time.deltaTime;
@@ -62,17 +62,17 @@ namespace GameGUI
                             {
                                 DialogViewer.currentPos++;
                                 timer = 0;
-                                convtext.text = LevelManager.resentviewer.GetComponent<DialogViewer>().currconv.Substring(0, DialogViewer.currentPos);
-                                if (DialogViewer.currentPos >= LevelManager.resentviewer.GetComponent<DialogViewer>().currconv.Length)
+                                convtext.text = LevelManager.presentviewer.GetComponent<DialogViewer>().currconv.Substring(0, DialogViewer.currentPos);
+                                if (DialogViewer.currentPos >= LevelManager.presentviewer.GetComponent<DialogViewer>().currconv.Length)
                                 {
-                                    LevelManager.resentviewer.GetComponent<DialogViewer>().ShowOverProcess();
+                                    LevelManager.presentviewer.GetComponent<DialogViewer>().ShowOverProcess();
                                 }
                             }
                         }
                         break;
                     case PanelType.RequestStop:
-                        convtext.text = LevelManager.resentviewer.GetComponent<DialogViewer>().currconv;
-                        LevelManager.resentviewer.GetComponent<DialogViewer>().ShowOverProcess();
+                        convtext.text = LevelManager.presentviewer.GetComponent<DialogViewer>().currconv;
+                        LevelManager.presentviewer.GetComponent<DialogViewer>().ShowOverProcess();
                         break;
                     default:
                         break;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameTool;
 using DataBase;
+using UnityEngine.UI;
+using LitJson;
 
 namespace GameGUI
 {
@@ -12,6 +14,15 @@ namespace GameGUI
         private GameObject selectelement;
         private static string buttonprefab_path = "GamePrefabs/UIPrefab/Buttons/";
         private static List<string> elementlist = new List<string>();
+        private static Button cancelbutton;
+        private JsonData elementdata;
+        private static string elementdata_path = "";
+        private void Awake()
+        {
+            cancelbutton = GetComponentInChildren<Button>();
+            cancelbutton.onClick.AddListener(Cancel);
+            cancelbutton.gameObject.SetActive(false);
+        }
         private static void InstalizePanel()
         {
 
@@ -19,6 +30,7 @@ namespace GameGUI
         public static void RemoveElement(GameObject elementbutton)
         {
             GameObject.Destroy(elementbutton);
+            cancelbutton.gameObject.SetActive(true);
 
         }
         public void AddElement(string name)
@@ -30,6 +42,7 @@ namespace GameGUI
         {
             LevelManager.Instance().elementspanel.AddElement(LevelManager.choosingelement);
             LevelManager.Instance().AddElementDone();
+            cancelbutton.gameObject.SetActive(false);
         }
     }
 

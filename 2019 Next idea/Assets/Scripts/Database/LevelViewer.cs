@@ -25,11 +25,11 @@ namespace DataBase
            leveldata = JsonMapper.ToObject(level_data.text);
            level_id = leveldata[0]["MapID"].ToString();
            LandManager.Instance().ReadMap(level_id);
-            LevelManager.resentviewer.GetComponent<DialogViewer>().InstalizeDialog(level_id);
+            LevelManager.presentviewer.GetComponent<DialogViewer>().InstalizeDialog(level_id);
            InstalizeCondition();
            haspassed = false;
            CircuitStart();
-            LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.LoadOver);
+            LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.LoadOver);
         }
         private void Update()
         {
@@ -53,7 +53,7 @@ namespace DataBase
                 NormalCharger.allnormalchargers[i].OnActive(null, null);
             }
             isactive = true;
-            LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.StartCircuit);
+            LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.StartCircuit);
 
         }
         /// <summary>
@@ -70,7 +70,7 @@ namespace DataBase
                 processingcondition[element.GetLight_ID()].Clear();
             }
             isactive = false;
-            LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.StopCircuit);
+            LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.StopCircuit);
         }
         private static void InstalizeCondition()
         {
@@ -117,7 +117,7 @@ namespace DataBase
                 {
                     haspassed = true;
                     Debug.Log("Pass");
-                    LevelManager.resentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.Pass);
+                    LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.Pass);
                     LevelManager.Instance().UpdateRateList(level_id, true);
                     //todo:通关处理
                 }

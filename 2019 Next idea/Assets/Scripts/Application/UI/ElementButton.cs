@@ -13,7 +13,7 @@ namespace GameGUI
         private string name;
         private void Awake()
         {
-            GetComponent<Button>().onClick.AddListener(OnClick);
+            GetComponentInChildren<Button>().onClick.AddListener(OnClick);
         }
         /// <summary>
         /// 点击时移除对应原件，变换鼠标指针等
@@ -22,7 +22,6 @@ namespace GameGUI
         {
             if(!LevelManager.setingelement)
             {
-                LevelManager.Instance().ChangeArrow(name);
                 LevelManager.setingelement = true;
                 LevelManager.choosingelement = name;
                 ElementsPanel.RemoveElement(this.gameObject);

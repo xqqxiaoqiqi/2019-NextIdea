@@ -19,7 +19,13 @@ namespace GameTool
         public static Stack<Element> processingsource = new Stack<Element>();
         protected static string enable_texturepath = "Texture/ElementsTexture/Enable/";
         protected static string disable_texturepath = "Texture/ElementsTexture/Disable/";
+        /// <summary>
+        /// 元件ID,选择贴图的时候会用到
+        /// </summary>
         protected string element_ID;
+        /// <summary>
+        /// 元件名称
+        /// </summary>
         public string elementname;
         protected static Dictionary<Vector3, Element> elementlist = new Dictionary<Vector3, Element>();
         public bool rotateable=false;
@@ -56,8 +62,6 @@ namespace GameTool
             myland.BeforeRequestCharge(myland, myland.bottomnode);
             myland.BeforeRequestCharge(myland, myland.leftnode);
             myland.BeforeRequestCharge(myland, myland.rightnode);
-
-
             //调用结束后当前标号出栈
             myland.stepstack.Pop();
 
@@ -115,7 +119,7 @@ namespace GameTool
 
         }
         /// <summary>
-        /// 获取所在地格引用
+        /// 初始化地格信息
         /// </summary>
         /// <returns></returns>
         public virtual bool InstalizeThisElement()
@@ -146,6 +150,13 @@ namespace GameTool
             }
 
         }
+        /// <summary>
+        /// 判断某元件周围是否有其他元件，写的很蠢
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public static bool ContainElement(Vector3 vector,int x,int y)
         {
             if(elementlist.ContainsKey(new Vector3(vector.x+x,vector.y+y,vector.z)))
@@ -154,6 +165,9 @@ namespace GameTool
             }
             return false;
         }
+        /// <summary>
+        /// 元件删除调用
+        /// </summary>
         public void RequestDestroy()
         {
             elementlist.Remove(this.transform.position);

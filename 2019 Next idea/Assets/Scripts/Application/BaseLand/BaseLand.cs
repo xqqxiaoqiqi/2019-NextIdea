@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DataBase;
 using System;
+using GameGUI;
 
 namespace GameTool
 {
@@ -170,8 +171,10 @@ namespace GameTool
                     }
                 }
             }
-
-
+            else if(myelement!=null)
+            {
+                ElemenOperation.Instance().ShowOperation(myelement);
+            }
         }
     }
 }
