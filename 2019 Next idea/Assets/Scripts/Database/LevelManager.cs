@@ -122,7 +122,8 @@ namespace DataBase
         public void AddElementDone()
         {
             choosingelement = null;
-            setingelement = false;            
+            setingelement = false;
+            ElementsPanel.cancelbutton.gameObject.SetActive(false);
         }
     }
 
