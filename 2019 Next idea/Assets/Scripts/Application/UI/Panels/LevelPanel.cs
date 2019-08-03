@@ -48,6 +48,7 @@ namespace GameGUI
         {
             DialogViewer.HidePanel(LevelManager.Instance().successpanel);
             DialogViewer.HidePanel(LevelManager.Instance().exitpanel);
+            DialogViewer.HidePanel(LevelManager.Instance().connectingpanel);
             LevelManager.Instance().CloseLevel();
             DialogViewer.HidePanel(LevelManager.Instance().gamepanel);
             DialogViewer.ShowPanel(LevelManager.Instance().levelselectpanel);

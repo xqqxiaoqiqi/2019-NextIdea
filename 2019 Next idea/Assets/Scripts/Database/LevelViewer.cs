@@ -59,7 +59,7 @@ namespace DataBase
             }
             isactive = true;
             LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.StartCircuit);
-
+            DialogViewer.ShowPanel(LevelManager.Instance().connectingpanel);
         }
         /// <summary>
         /// 电路关闭
@@ -76,6 +76,7 @@ namespace DataBase
             }
             isactive = false;
             LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.StopCircuit);
+            DialogViewer.HidePanel(LevelManager.Instance().connectingpanel);
         }
         private static void InstalizeCondition()
         {
@@ -124,6 +125,7 @@ namespace DataBase
                     Debug.Log("Pass");
                     LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.Pass);
                     LevelManager.Instance().UpdateRateList(level_id, true);
+                    DialogViewer.HidePanel(LevelManager.Instance().connectingpanel);
                     DialogViewer.ShowPanel(LevelManager.Instance().successpanel);
                     //todo:通关处理
                 }

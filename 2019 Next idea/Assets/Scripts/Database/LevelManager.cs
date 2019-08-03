@@ -25,6 +25,7 @@ namespace DataBase
         public ElementsPanel elementspanel;
         public GameObject exitpanel;
         public GameObject successpanel;
+        public GameObject connectingpanel;
         private string detailpath = "LevelCanvaDataBase/LevelDescription/LevelDescription";
         private string arrowpath = "Texture/GameCursors/";
         private JsonData detaildata;
