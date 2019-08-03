@@ -124,6 +124,7 @@ namespace DataBase
                     Debug.Log("Pass");
                     LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.Pass);
                     LevelManager.Instance().UpdateRateList(level_id, true);
+                    DialogViewer.ShowPanel(LevelManager.Instance().successpanel);
                     //todo:通关处理
                 }
 

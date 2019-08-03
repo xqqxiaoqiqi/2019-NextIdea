@@ -24,6 +24,7 @@ namespace DataBase
         public GameObject gamepanel;
         public ElementsPanel elementspanel;
         public GameObject exitpanel;
+        public GameObject successpanel;
         private string detailpath = "LevelCanvaDataBase/LevelDescription/LevelDescription";
         private string arrowpath = "Texture/GameCursors/";
         private JsonData detaildata;
@@ -96,8 +97,7 @@ namespace DataBase
             LevelViewer.successcondition.Clear();
             LevelViewer.processingcondition.Clear();
             ElementsPanel.Instance().DestroyAllElements();
-            DialogViewer.HidePanel(gamepanel);
-            DialogViewer.ShowPanel(levelselectpanel);
+
         }
         /// <summary>
         /// 加载对话子类

@@ -46,8 +46,11 @@ namespace GameGUI
         }
         public void EnterOnClick()
         {
+            DialogViewer.HidePanel(LevelManager.Instance().successpanel);
             DialogViewer.HidePanel(LevelManager.Instance().exitpanel);
             LevelManager.Instance().CloseLevel();
+            DialogViewer.HidePanel(LevelManager.Instance().gamepanel);
+            DialogViewer.ShowPanel(LevelManager.Instance().levelselectpanel);
         }
         public void CancelOnClick()
         {
