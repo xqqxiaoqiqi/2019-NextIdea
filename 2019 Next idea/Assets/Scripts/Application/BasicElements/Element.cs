@@ -27,7 +27,7 @@ namespace GameTool
         /// 元件名称
         /// </summary>
         public string elementname;
-        protected static Dictionary<Vector3, Element> elementlist = new Dictionary<Vector3, Element>();
+        public static Dictionary<Vector3, Element> elementlist = new Dictionary<Vector3, Element>();
         public bool rotateable=false;
         /// <summary>
         /// 被激活时调用，更换材质播放特效并调用BeActive

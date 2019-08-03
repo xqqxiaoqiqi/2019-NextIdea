@@ -35,7 +35,7 @@ namespace DataBase
         [SerializeField]
         protected static bool showstory = true;
         protected int nextnum = 0;
-        protected static Dictionary<string, List<string>> dialoglist = new Dictionary<string, List<string>>();
+        public static Dictionary<string, List<string>> dialoglist = new Dictionary<string, List<string>>();
         protected static string dialog_path = "LevelCanvaDataBase/DialogData/";
         protected JsonData dialog_data;
         protected string dialogstate;

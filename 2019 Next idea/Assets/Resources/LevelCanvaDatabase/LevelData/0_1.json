@@ -12,18 +12,5 @@
 
 
     ]
-  },
-  {
-    "MapID": "0_1",
-    "StartElement": [
-      "repeater"
-    ],
-    "SuccessCondition": [
-      {
-        "light_0": "0,0,0,0,0"
-      }
-
-
-    ]
   }
 ]

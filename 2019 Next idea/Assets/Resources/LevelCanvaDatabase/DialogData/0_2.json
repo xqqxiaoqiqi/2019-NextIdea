@@ -2,41 +2,11 @@
   {
     "LoadOver": [
       {
-        "_0": "Texture@something:contentadaadadadadadadadadadadadadad",
-        "_1": "Texture@something:content大大大大"
+        "_0": "Texture@something:第二关的描述",
+        "_1": "Texture@something:done"
       }
 
 
-    ],
-    "StopCircuit": [
-      {
-        "0": "StopCircuit0,0,0,0,0",
-        "1": "1,1,1,1,1"
-      }
-    ],
-    "StartCircuit": [
-      {
-        "0": "StartCircuit0,0,0,0,0",
-        "1": "1,1,1,1,1"
-      }
-    ],
-    "AddElement": [
-      {
-        "0": "AddElement0,0,0,0,0",
-        "1": "1,1,1,1,1"
-      }
-    ],
-    "RemoveElement": [
-      {
-        "0": "RemoveElement0,0,0,0,0",
-        "1": "1,1,1,1,1"
-      }
-    ],
-    "Pass": [
-      {
-        "0": "Pass0,0,0,0,0",
-        "1": "1,1,1,1,1"
-      }
     ]
   }
 ]

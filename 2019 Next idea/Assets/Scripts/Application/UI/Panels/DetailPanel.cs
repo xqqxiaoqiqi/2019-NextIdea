@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameTool;
+using DataBase;
 
-public class DetailPanel : MonoBehaviour
+namespace GameGUI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class DetailPanel : MonoBehaviour
     {
-        
+        void Start()
+        {
+
+        }
+
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

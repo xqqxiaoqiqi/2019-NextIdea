@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameTool;
 using LitJson;
+using GameGUI;
 using System;
 namespace DataBase
 {
@@ -13,7 +14,7 @@ namespace DataBase
         [SerializeField]
         public static Dictionary<string, Queue<int>> processingcondition = new Dictionary<string, Queue<int>>();
         public static int maxcheck = 5;
-        private bool isactive = false;
+        public static  bool isactive = false;
         private static float timer = 0;
         private static JsonData leveldata;
         private static string level_id;
@@ -29,7 +30,11 @@ namespace DataBase
            InstalizeCondition();
            haspassed = false;
            CircuitStart();
-            LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.LoadOver);
+           LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.LoadOver);
+           for(int i=0;i<leveldata[0]["StartElement"].Count;i++)
+            {
+                ElementsPanel.Instance().AddElement(leveldata[0]["StartElement"][i].ToString());
+            }
         }
         private void Update()
         {
@@ -38,7 +43,7 @@ namespace DataBase
                 timer += Time.deltaTime;
                 if (timer >= 0.5f)
                 {
-                    CheckCondition();;
+                    CheckCondition();
                 }
 
             }
@@ -145,6 +150,16 @@ namespace DataBase
                 }
             }
             return true;
+        }
+        public void DestroyLevel()
+        {
+            //back to chose;
+            isactive = false;
+            GameObject map = GameObject.FindGameObjectWithTag("GameMap");
+            for (int i=0;i<map.transform.childCount;i++)
+            {
+                Destroy(map.transform.GetChild(i).gameObject);
+            }
         }
     }
 }

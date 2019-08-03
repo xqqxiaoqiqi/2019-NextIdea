@@ -53,6 +53,7 @@ namespace GameGUI
         public void RequestDestroy()
         {
             GameElementManager.Instance().RemoveElement(operationelement.gameObject);
+            DialogViewer.HidePanel(thisobject);
         }
     }
 }

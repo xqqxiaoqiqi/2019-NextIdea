@@ -7,7 +7,7 @@ namespace DataBase
 {
     public class LandManager : UnitySingleton<LandManager>
     {
-        private static Dictionary<Vector2, BaseLand> landmap = new Dictionary<Vector2, BaseLand>();
+        public static Dictionary<Vector2, BaseLand> landmap = new Dictionary<Vector2, BaseLand>();
         private TextAsset mapdata;
         private string datapath = "LevelCanvaDatabase/MapData/";
         private string landprefabpath = "GamePrefabs/GroundPrefab/";
