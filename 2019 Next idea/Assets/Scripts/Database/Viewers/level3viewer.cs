@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DataBase;
+using GameGUI;
+using GameTool;
 
-public class level3viewer : MonoBehaviour
+public class level3viewer :DialogViewer
 {
     // Start is called before the first frame update
     void Start()
