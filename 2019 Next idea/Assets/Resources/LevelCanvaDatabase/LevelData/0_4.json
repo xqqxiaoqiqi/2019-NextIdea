@@ -1,19 +1,22 @@
 [
   {
-    "MapID": "0_2",
+    "MapID": "0_4",
     "StartElement": [
-      
+      "repeater",
+      "repeater",
+      "wire",
+      "wire"
+
+        
     ],
     "SuccessCondition": [
       {
-        "light_0": "0,0,0,0,0",
-        "light_1": "1,1,1,1,1",
-        "light_2": "0,0,0,0,0"
-
+        "light_0": "1,0,1,0,1"
       }
 
 
-    ]
+    ],
+    "CheckTime": "5.0"
   }
 
 ]

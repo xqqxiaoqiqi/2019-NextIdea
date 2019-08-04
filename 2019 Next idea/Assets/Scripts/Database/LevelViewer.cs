@@ -16,6 +16,7 @@ namespace DataBase
         public static int maxcheck = 5;
         public static  bool isactive = false;
         private static float timer = 0;
+        private static float checktime = 1.0f;
         private static JsonData leveldata;
         private static string level_id;
         private string leveldata_path = "LevelCanvaDataBase/LevelData/";
@@ -29,11 +30,16 @@ namespace DataBase
             LevelManager.presentviewer.GetComponent<DialogViewer>().InstalizeDialog(level_id);
            InstalizeCondition();
            haspassed = false;
-           CircuitStart();
            LevelManager.presentviewer.GetComponent<DialogViewer>().RequestDialog(DialogState.LoadOver);
            for(int i=0;i<leveldata[0]["StartElement"].Count;i++)
             {
                 ElementsPanel.Instance().AddElement(leveldata[0]["StartElement"][i].ToString());
+            }
+            CircuitStart();
+            if(leveldata[0].ContainsKey("CheckTime"))
+            {
+                checktime = float.Parse(leveldata[0]["CheckTime"].ToString());
+                Debug.Log("检测时间已重置");
             }
         }
         private void Update()
@@ -41,7 +47,7 @@ namespace DataBase
             if(isactive)
             {
                 timer += Time.deltaTime;
-                if (timer >= 1.0f)
+                if (timer >= checktime)
                 {
                     CheckCondition();
                 }
