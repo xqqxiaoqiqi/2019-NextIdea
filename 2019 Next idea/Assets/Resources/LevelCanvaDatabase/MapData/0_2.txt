@@ -1,5 +1,5 @@
-land,land,land,land,land,land
-land,land,land,land,land,land
-land,land,land,land,land,land
-land,land,land,land,land,land
-land,land,land,land,land,land
+land,land,land|wire,land|wire,land|wire,land|light_0
+land,moveableland|wire,land|repeater_180,land|wire,land,land
+land|normalcharger,land|wire,land|wire,land,land|wire,land|light_1
+land,moveableland,moveableland|repeater_90,land|wire,land|wire,land
+land,land,land|wire,land|repeater_180,land|repeater_180,land|light_2

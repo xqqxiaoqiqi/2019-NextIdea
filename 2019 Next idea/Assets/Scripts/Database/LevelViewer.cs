@@ -41,7 +41,7 @@ namespace DataBase
             if(isactive)
             {
                 timer += Time.deltaTime;
-                if (timer >= 0.5f)
+                if (timer >= 1.0f)
                 {
                     CheckCondition();
                 }

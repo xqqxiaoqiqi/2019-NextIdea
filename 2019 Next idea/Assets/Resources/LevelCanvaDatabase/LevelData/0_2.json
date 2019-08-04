@@ -2,11 +2,14 @@
   {
     "MapID": "0_2",
     "StartElement": [
-      "repeater"
+      
     ],
     "SuccessCondition": [
       {
-        "light_0": "0,0,0,0,0"
+        "light_0": "0,0,0,0,0",
+        "light_1": "1,1,1,1,1",
+        "light_2": "0,0,0,0,0"
+
       }
 
 

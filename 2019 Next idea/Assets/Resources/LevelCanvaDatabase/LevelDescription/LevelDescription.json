@@ -2,26 +2,26 @@
   {
     "LevelType": "Normal",
     "LevelID": "0_1",
-    "Description": "这是第一关的描述"
+    "Description": "从这里开始"
   },
   {
     "LevelType": "Normal",
     "LevelID": "0_2",
-    "Description": "这是第二关的描述"
+    "Description": "引入中继器1"
   },
   {
     "LevelType": "Normal",
     "LevelID": "0_3",
-    "Description": "这是第三关的描述"
+    "Description": "引入中继器2"
   },
   {
     "LevelType": "Normal",
     "LevelID": "0_4",
-    "Description": "这是第四关的描述"
+    "Description": "极简时钟电路"
   },
   {
     "LevelType": "Special",
     "LevelID": "0_5",
-    "Description": "这是第五关的描述"
+    "Description": "引入特殊地格;与门的形式"
   }
 ]

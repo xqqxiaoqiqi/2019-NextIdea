@@ -34,8 +34,8 @@ namespace GameGUI
             if(operationelement!= null && operationelement.Equals(element))
             {
                 DialogViewer.HidePanel(thisobject);
-                operationelement = null;
                 operationelement.myland.GetComponent<Animation>().Play("stop");
+                operationelement = null;
             }
             else
             {

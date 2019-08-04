@@ -10,7 +10,7 @@ namespace GameTool
         private BaseLand headland;
         private BaseLand tailland;
         private float timer;
-        private float delay = 1.0f;
+        private float delay = 0.75f;
         private void Awake()
         {
             element_ID = "repeater";
