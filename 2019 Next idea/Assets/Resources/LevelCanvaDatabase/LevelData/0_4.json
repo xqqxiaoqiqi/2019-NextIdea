@@ -4,9 +4,7 @@
     "StartElement": [
       "repeater",
       "repeater",
-      "wire",
       "wire"
-
         
     ],
     "SuccessCondition": [
