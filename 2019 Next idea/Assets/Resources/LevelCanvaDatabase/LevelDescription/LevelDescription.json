@@ -2,22 +2,22 @@
   {
     "LevelType": "Normal",
     "LevelID": "0_1",
-    "Description": "红塔的火光挥之不去，盖娅之岛暗流汹涌，你的故事将从这里开始。"
+    "Description": "你的故事将从这里开始。"
   },
   {
     "LevelType": "Normal",
     "LevelID": "0_2",
-    "Description": "要想逃离“牢笼”，你必须先关闭警报，开启密道。"
+    "Description": "关闭警报！开启密道！"
   },
   {
     "LevelType": "Normal",
     "LevelID": "0_3",
-    "Description": "引入中继器2"
+    "Description": "电路密码已破解，请执行。"
   },
   {
     "LevelType": "Normal",
     "LevelID": "0_4",
-    "Description": "极简时钟电路"
+    "Description": "闪烁三下，即刻引爆。"
   },
   {
     "LevelType": "Special",
