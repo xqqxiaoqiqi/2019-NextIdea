@@ -1,5 +1,5 @@
 land,land,land,land,land,land
 land,moveableland,moveableland|wire,moveableland|wire,land,land
-land,land|repeater_-90,land,land|repeater_-270,land,land
-land|button,moveableland|,moveableland,moveableland|wire,land|light_0,land
+land,moveableland,land,land|repeater_-270,land,land
+land|button,moveableland|,land|repeater,moveableland|wire,land|light_0,land
 land,land,land,land,land,land

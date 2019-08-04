@@ -6,7 +6,7 @@ namespace GameTool
 {
     public class NormalCharger : Element
     {
-        public static List<NormalCharger> allnormalchargers = new List<NormalCharger>();
+        public static List<Element> allnormalchargers = new List<Element>();
         private  void Awake()
         {
             element_ID = "normalcharger";

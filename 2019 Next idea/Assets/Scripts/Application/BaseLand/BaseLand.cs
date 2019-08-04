@@ -157,31 +157,37 @@ namespace GameTool
         public void OnClick()
         {
 
-            if (!LevelViewer.isactive)
+            //if (!LevelViewer.isactive)
+            //{
+            if (LevelManager.setingelement)
             {
-                    if (LevelManager.setingelement)
-                    {
-                        if (myelement == null && interactable)
-                        {
-                            GameElementManager.Instance().AddElement(this.gameObject, LevelManager.choosingelement);
-                            LevelManager.Instance().AddElementDone();
-                        }
-                        else
-                        {
-                            Debug.Log("you can not do this");
-                        }
+                if (myelement == null && interactable)
+                {
+                    GameElementManager.Instance().AddElement(this.gameObject, LevelManager.choosingelement);
+                    LevelManager.Instance().AddElementDone();
                 }
-                ElemenOperation.Instance().ShowOperation(myelement);
-
-
+                else
+                {
+                    Debug.Log("you can not do this");
+                }
             }
             else
             {
-                if (myelement.elementname.Equals("button") || myelement.name.Equals("rod"))
+                if (myelement != null)
                 {
-                    myelement.GetComponent<Element>().OnActive(null, null);
+                    ElemenOperation.Instance().ShowOperation(myelement);
                 }
             }
+
+
+            //        }
+            //            else
+            //            {
+            //                if (myelement.elementname.Equals("button") || myelement.name.Equals("rod"))
+            //                {
+            //                    myelement.GetComponent<Element>().OnActive(null, null);
+            //    }
+            //}
 
         }
     }

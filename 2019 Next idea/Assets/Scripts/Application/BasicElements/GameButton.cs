@@ -11,6 +11,7 @@ namespace GameTool
         private void Awake()
         {
             element_ID = "button";
+            NormalCharger.allnormalchargers.Add(this);
         }
         public override void UpdateTexture()
         {
@@ -23,22 +24,26 @@ namespace GameTool
         }
         public override void OnSilence(BaseLand lastland, Element source)
         {
-            if (lastland != null)
+            if(isactive)
             {
-                //base.OnActive(source, land);
-            }
-            else
-            {
-                if (source == null)
+                if (lastland != null)
                 {
-                    processingsource.Push(this);
+                    //base.OnActive(source, land);
                 }
-                base.OnSilence(lastland, source);
-                if (processingsource.Peek().Equals(this))
+                else
                 {
-                    processingsource.Pop();
+                    if (source == null)
+                    {
+                        processingsource.Push(this);
+                    }
+                    base.OnSilence(lastland, source);
+                    if (processingsource.Peek().Equals(this))
+                    {
+                        processingsource.Pop();
+                    }
                 }
             }
+
         }
         IEnumerator ButtonOnActive(BaseLand lastland, Element source)
         {
