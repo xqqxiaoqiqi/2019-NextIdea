@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8312863556489202230}
   - component: {fileID: 5093709256190966650}
   - component: {fileID: 6423939702115703256}
+  - component: {fileID: 6686448313055342633}
   m_Layer: 8
   m_Name: land
   m_TagString: Land
@@ -211,3 +212,20 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.5}
       - {x: 0.5, y: -0.5}
       - {x: 0.5, y: 0.5}
+--- !u!111 &6686448313055342633
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191151187163234269}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ef196a933a6e15149a789c86bcc1a75c, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: ef196a933a6e15149a789c86bcc1a75c, type: 2}
+  - {fileID: 7400000, guid: 22ed4602caf197e4ebb31c33dffc0897, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0

@@ -51,6 +51,10 @@ namespace GameTool
             myland.stepstack.Pop();
 
         }
+        public override void AfterRotate()
+        {
+            UpdateConnect();
+        }
         /// <summary>
         /// 更新通信状态，旋转或初始化后调用
         /// </summary>

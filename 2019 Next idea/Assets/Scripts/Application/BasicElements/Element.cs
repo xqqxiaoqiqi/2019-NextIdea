@@ -70,13 +70,8 @@ namespace GameTool
         /// 旋转时调用
         /// </summary>
         /// <returns></returns>
-        public virtual bool RequestRotate()
+        public virtual void AfterRotate()
         {
-            if(rotateable)
-            {
-                return true;
-            }
-            return false;
         }
         /// <summary>
         /// 被取消激活时调用，更换材质关掉特效并调用BeSilence
@@ -128,7 +123,10 @@ namespace GameTool
 
             if(myland!=null)
             {
-                elementlist.Add(this.transform.position, this);
+                if(!elementlist.ContainsValue(this))
+                {
+                    elementlist.Add(this.transform.position, this);
+                }
                 UpdateTexture();
                 UpdateNearTexture(myland.topnode);
                 UpdateNearTexture(myland.bottomnode);
