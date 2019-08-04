@@ -5032,6 +5032,9 @@ MonoBehaviour:
   levelnums:
   - 0_1
   - 0_2
+  - 0_3
+  - 0_4
+  - 0_5
 --- !u!114 &1988385983
 MonoBehaviour:
   m_ObjectHideFlags: 0

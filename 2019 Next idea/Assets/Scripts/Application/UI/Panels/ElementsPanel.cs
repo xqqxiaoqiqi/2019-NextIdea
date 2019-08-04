@@ -16,7 +16,6 @@ namespace GameGUI
         private static List<GameObject> elementlist = new List<GameObject>();
         public static Button cancelbutton;
         private JsonData elementdata;
-        private static string elementdata_path = "";
         private void Awake()
         {
             cancelbutton = GetComponentInChildren<Button>();

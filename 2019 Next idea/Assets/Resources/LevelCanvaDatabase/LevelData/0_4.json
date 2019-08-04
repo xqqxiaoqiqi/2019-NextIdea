@@ -1,0 +1,20 @@
+[
+  {
+    "MapID": "0_4",
+    "StartElement": [
+      "repeater",
+      "repeater",
+      "wire"
+        
+    ],
+    "SuccessCondition": [
+      {
+        "light_0": "1,0,1,0,1"
+      }
+
+
+    ],
+    "CheckTime": "5.0"
+  }
+
+]

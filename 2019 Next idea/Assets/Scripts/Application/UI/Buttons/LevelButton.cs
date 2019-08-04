@@ -10,7 +10,7 @@ namespace GameGUI
     {
         [SerializeField]
         //外部设置
-        private string levelnum;
+        private string levelnum = "default";
         private string leveldetail;
         [SerializeField]
         private GameObject detailpanel;

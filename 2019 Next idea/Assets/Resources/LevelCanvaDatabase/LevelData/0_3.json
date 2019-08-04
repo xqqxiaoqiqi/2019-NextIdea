@@ -1,0 +1,18 @@
+[
+  {
+    "MapID": "0_3",
+    "StartElement": [
+    ],
+    "SuccessCondition": [
+      {
+        "light_0": "0,1,1,1,1",
+        "light_1": "0,0,1,1,1",
+        "light_2": "0,0,0,1,1"
+
+      }
+
+
+    ]
+  }
+
+]

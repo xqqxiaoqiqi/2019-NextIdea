@@ -67,9 +67,9 @@ namespace GameTool
         /// 判断land栈顶元素，合法则调用RequestCharge
         /// </summary>
         /// <param name="land"></param>
-        public virtual void BeforeRequestCharge(BaseLand thisland,BaseLand node)
+        public virtual void BeforeRequestCharge(BaseLand thisland, BaseLand node)
         {
-            if(node!=null)
+            if (node != null)
             {
                 if (node.stepstack.Count == 0)
                 {
@@ -86,12 +86,12 @@ namespace GameTool
         /// <param name="sourceelement"></param>
         public bool RequestOnCharge(BaseLand lastland)
         {
-                if (!sourcelist.Contains(Element.processingsource.Peek()))
-                {
-                    sourcelist.Add(Element.processingsource.Peek());
-                    OnCharge(lastland);
-                    return true;
-                }
+            if (!sourcelist.Contains(Element.processingsource.Peek()))
+            {
+                sourcelist.Add(Element.processingsource.Peek());
+                OnCharge(lastland);
+                return true;
+            }
             return false;
         }
         /// <summary>
@@ -156,25 +156,33 @@ namespace GameTool
         }
         public void OnClick()
         {
-            if(LevelManager.setingelement)
+
+            if (!LevelViewer.isactive)
             {
-                if (interactable)
+                    if (LevelManager.setingelement)
+                    {
+                        if (myelement == null && interactable)
+                        {
+                            GameElementManager.Instance().AddElement(this.gameObject, LevelManager.choosingelement);
+                            LevelManager.Instance().AddElementDone();
+                        }
+                        else
+                        {
+                            Debug.Log("you can not do this");
+                        }
+                }
+                ElemenOperation.Instance().ShowOperation(myelement);
+
+
+            }
+            else
+            {
+                if (myelement.elementname.Equals("button") || myelement.name.Equals("rod"))
                 {
-                    if (myelement == null)
-                    {
-                        GameElementManager.Instance().AddElement(this.gameObject, LevelManager.choosingelement);
-                        LevelManager.Instance().AddElementDone();
-                    }
-                    else
-                    {
-                        Debug.Log("you can not do this");
-                    }
+                    myelement.GetComponent<Element>().OnActive(null, null);
                 }
             }
-            else if(myelement!=null)
-            {
-                ElemenOperation.Instance().ShowOperation(myelement);
-            }
+
         }
     }
 }
