@@ -12,12 +12,12 @@
   {
     "LevelType": "Normal",
     "LevelID": "0_3",
-    "Description": "电路密码已破解，请执行。"
+    "Description": "通信密码已破解，请执行。"
   },
   {
     "LevelType": "Normal",
     "LevelID": "0_4",
-    "Description": "闪烁三下，即刻引爆。"
+    "Description": "开始闪烁，即刻引爆。"
   },
   {
     "LevelType": "Special",
